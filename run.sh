@@ -1,4 +1,4 @@
-pdflatex paper
-bibtex paper
-pdflatex paper
-pdflatex paper
+pdflatex foresight
+bibtex foresight
+pdflatex foresight
+pdflatex foresight
