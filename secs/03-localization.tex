@@ -1,0 +1,21 @@
+% !TEX root = ../foresight.tex
+
+\section{Relative pose localization}
+
+We use 6 ultra-wideband radios and the Bebop's onboard odometry measurements
+to estimate the relative position of the quadcopter with respect to the car with an
+accuracy of +/- 6cm. The 6 UWBs were positioned as far apart as possible on the
+car while still generally maintaining line of sight with the quadcopter when the
+quadcopter is positioned in front of the car. The transform from a set base position
+on the car to each UWB was then measured. These transforms allow us to
+calculate the distance between each UWB and the estimated state of the quadcopter.
+
+Orientation is calibrated at start by lining up the quadcopter along the car's x-axis.
+We rely on the Bebop's onboard yaw measurement for orientation.
+We collect the range measurements $r_{i}$ from the 6 UWBs (at a rate of about 10 Hz)
+and use nonlinear least squares optimization to estimate the quadcopter's x-y position. 
+We combine the x-y position estimate with altitude and velocity data from the quadcopter in
+a UKF provided by the ROS robot\textunderscore localization package.  We found that
+the UWB range data was not reliable enough to accurately calculate the z position
+from the range data alone. We therefore use the z value estimated by the UKF in
+the nonlinear least squares optimization.
