@@ -17,11 +17,19 @@
 
 We use 6 ultra-wideband radios and the Bebop's onboard odometry measurements
 to estimate the relative position of the quadcopter with respect to the car with an
-accuracy of +/- 6cm. The 6 UWBs were positioned as far apart as possible on the
-car while still generally maintaining line of sight with the quadcopter when the
+accuracy of 13 cm. The 6 UWBs were positioned as far apart as possible on the
+car while still maintaining line of sight with the quadcopter when the
 quadcopter is positioned in front of the car. The transform from a set base position
 on the car to each UWB was then measured. These transforms allow us to
 calculate the distance between each UWB and the estimated state of the quadcopter.
+
+\begin{align*} 
+    \min_{x} \sum_{i=1}^{n} (r_{i}^2 - \lVert x - t_i\rVert^2)^2
+\end{align*}
+
+$$
+    J = 4(r_i^2 - \lVert x - t_i \rVert^2)(t_i - x)
+$$
 
 Orientation is calibrated at start by lining up the quadcopter along the car's x-axis.
 We rely on the Bebop's onboard yaw measurement for orientation.
