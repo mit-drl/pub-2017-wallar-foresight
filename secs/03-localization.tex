@@ -2,6 +2,19 @@
 
 \section{Relative pose localization}
 
+\begin{figure}
+  \centering
+    \includegraphics[width=0.45\textwidth]{foresight_frames}
+  \caption{The frames and measurements of our system. The base frame
+   is the car's body frame. We measure transforms $t_{i}$ from the body
+   frame to every UWB tag. The velocity controller uses the odom-to-base\textunderscore 
+   link transform to calculate commands to control the quadcopter's velocity.
+   Planning is done in the car's body frame.
+   The UWBs make range measurements $r_{i}$. A position estimate $\hat{x}$
+   is calculated by solving for the least squares error between $r_{i}$ and $\hat{x}$.}
+  \label{fig:frames}
+\end{figure}
+
 We use 6 ultra-wideband radios and the Bebop's onboard odometry measurements
 to estimate the relative position of the quadcopter with respect to the car with an
 accuracy of +/- 6cm. The 6 UWBs were positioned as far apart as possible on the

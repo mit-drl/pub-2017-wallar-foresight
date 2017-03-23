@@ -11,11 +11,15 @@ These subsection can potentially be merged.
 A car with XY sensors. A quad with Z sensors...
 Image of the car with the quad.
 
-We used a Parrot Bebop 2 as the quadcopter. It is
-equipped with a camera, and velocity and altitude
-measurements can be read from its SDK at a rate of
-5 Hz. The inputs to the Bebop are roll, pitch, yaw rate,
-and z velocity. We use a 
+We used a Parrot Bebop 2 as the quadcopter. It is equipped with a camera,
+and velocity and altitude measurements can be read from its SDK at a rate of
+5 Hz. The Bebop uses a software gimbal to stabilize the camera image.
+
+The inputs to the Bebop are roll angle $\phi$, pitch angle $\theta$, 
+yaw rate $\omega$, and z velocity $\dot{z}$. We use
+PID controllers to control the inputs.
+
+$$ u = [\phi, \theta, \omega, \dot{z}] $$
 
 \subsection{Method overview}
 Overview communication.
