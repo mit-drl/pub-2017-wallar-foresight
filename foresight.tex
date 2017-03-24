@@ -21,6 +21,8 @@
 \usepackage{fancyhdr}
 \usepackage{amsthm}
 
+\graphicspath{ {resources/} }
+
 \renewcommand{\thefootnote}{\fnsymbol{footnote}}
 \renewcommand{\algorithmicrequire}{\textbf{Input:}}
 \renewcommand{\algorithmicensure}{\textbf{Output:}}
@@ -59,11 +61,11 @@
 
 \begin{document}
 
-\title{Foresight: Remote Sensing For Driverless Cars Using Small
-Unmanned Aerial Vehicles}
+\title{Foresight: Remote Sensing For Autonomous Vehicles Using a Small
+Unmanned Aerial Vehicle and Ultra-wideband Localization}
 
 
-\author{Alex Wallar \and Javier Alonso-Mora \and Raphael Chang
+\author{Alex Wallar \and \and Brandon Araki \and Javier Alonso-Mora \and Raphael Chang
 \and Daniela Rus}
 
 \maketitle
@@ -76,7 +78,7 @@ Unmanned Aerial Vehicles}
 
 \input{secs/02-overview}
 
-\input{secs/03-comm}
+\input{secs/03-localization}
 
 \input{secs/04-planning}
 

@@ -2,7 +2,40 @@
 
 \section{Introduction}
 
+<<<<<<< HEAD
 Introduction: Lots of accidents due to not seeing what's going on. For example a pedestrian or a biker behind a car. Could be similar to the motivation in Wilko's paper.
+=======
+Autonomous systems are becoming increasingly integrated into
+our daily lives. Two of the most conspicuous examples are UAVs,
+which are used to capture aerial footage, and autonomous cars,
+which promise to make driving much safer and more convenient
+than it is today. Unfortunately, both of these types of autonomous
+robot have deficiencies. UAVs are highly mobile and agile, but they
+have limited range and payload capabilities. Meanwhile, cars and trucks
+have range and payload capabilities several orders of magnitude greater than
+those of UAVs but, being constrained to traveling on roads, are far less mobile.
+
+In the context of autonomous cars, this mobility constraint becomes apparent
+when navigating corners and crowded environments. Since a car cannot
+see around corners and other obstacles without physically reorienting its
+entire bulk, it must often navigate with little information about what obstacles
+it may encounter. Therefore it is blind to obstacles such as a biker or little old
+lady crossing the street behind an oncoming bus and therefore must proceed
+with extreme caution. Pairing an autonomous car with a quadcopter is a potential
+solution to this problem - the quadcopter could use the car as a charging base,
+while the car could send the quadcopter out on missions to scout ahead and
+fill in the blind spots in its vision.
+
+The one crucial step in enabling a quadcopter and an autonomous car to work
+together is to ensure that there exists an accurate transform between the car
+and the quadcopter. GPS, which has an accuracy of about +/- 2m, can suffice
+for when the quadcopter is navigating broad open spaces. However, +/- 2m
+accuracy is completely insufficient for when the quadcopter must navigate
+obstacle-filled environments (such as a city center) or land on the car. In this 
+paper, we present a method using ultra-wideband radios to measure the relative 
+position of the quadcopter relative to the car with +/- 10cm accuracy, enabling 
+the quadcopter to safely navigate to blind spots and then land back on the car.
+>>>>>>> b4eb4ef54c24b7f7233dc6f6d19fc36e01d849b6
 
 This method presents a method augment what a self-driving car can see.
 - Occlusions limit the field of view of the car
@@ -23,9 +56,12 @@ Informative planning and exploration -> V. Kumar, D. Rus, R. Siegwart.
 
 \begin{itemize}
 \item
+Method for finding the relative transform between two mobile robots
+\item
 Method for informative sensing
 \item
-Open source communication framework
+Experiments that prove that the quadcopter can accurately navigate
+to blind spots and land back on the car.
 \end{itemize}
 
 We validate our approach with data collected with our self-driving vehicle and a small UAV.
