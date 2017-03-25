@@ -1,16 +1,20 @@
-\documentclass[letterpaper, 10pt, conference]{ieeeconf}
-\usepackage{times}
+% \documentclass[letterpaper, 10pt, conference]{ieeeconf}
 
+\documentclass[graybox]{svmult}
 
-\IEEEoverridecommandlockouts
-\overrideIEEEmargins
 
 \let\proof\relax
 \let\endproof\relax
 
+\usepackage{mathptmx}
+\usepackage{helvet}
+\usepackage{courier}
+\usepackage{makeidx}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage[bottom]{footmisc}
 \usepackage{amsmath, amssymb}
 \usepackage{url}
-\usepackage[pdftex]{graphicx}
 \usepackage{float}
 \usepackage{relsize}
 \usepackage{algorithm}
@@ -21,7 +25,7 @@
 \usepackage{fancyhdr}
 \usepackage{amsthm}
 
-\graphicspath{ {resources/} }
+\graphicspath{{resources/}}
 
 \renewcommand{\thefootnote}{\fnsymbol{footnote}}
 \renewcommand{\algorithmicrequire}{\textbf{Input:}}
@@ -53,20 +57,25 @@
 \newcommand{\argmax}[1]{\underset{#1}{\operatorname{arg}\,\operatorname{max}}\;}
 \newcommand{\mychange}[1]{\textcolor{red}{#1}}
 
-\newtheorem{theorem}{Theorem}
-\newtheorem{lemma}{Lemma}
-\newtheorem{corollary}{Corollary}
-\newtheorem{definition}{Definition}
-\newtheorem{problem}{Problem}
+% \newtheorem{theorem}{Theorem}
+% \newtheorem{lemma}{Lemma}
+% \newtheorem{corollary}{Corollary}
+% \newtheorem{definition}{Definition}
+% \newtheorem{problem}{Problem}
+
+\makeindex
 
 \begin{document}
 
-\title{Foresight: Remote Sensing For Autonomous Vehicles Using a Small
-Unmanned Aerial Vehicle and Ultra-wideband Localization}
+\title*{Foresight: Remote Sensing For Autonomous Vehicles Using a Small
+Unmanned Aerial Vehicle}
 
+\titlerunning{Foresight: Remote Sensing For Autonomous Vehicles}
 
-\author{Alex Wallar \and \and Brandon Araki \and Javier Alonso-Mora \and Raphael Chang
+\author{Alex Wallar \and Brandon Araki \and Javier Alonso-Mora \and Raphael Chang
 \and Daniela Rus}
+
+\institute{Alex Wallar \at Massachusetts Institute of Technology, \email{wallar@mit.edu}}
 
 \maketitle
 
@@ -86,9 +95,7 @@ Unmanned Aerial Vehicle and Ultra-wideband Localization}
 
 \input{secs/06-conclusion}
 
-
-
-\bibliographystyle{IEEEtran}
+\bibliographystyle{spbasic}
 \thebibliography{bib}
 
 \end{document}
