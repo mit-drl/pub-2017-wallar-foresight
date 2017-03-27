@@ -6,7 +6,9 @@
 \let\proof\relax
 \let\endproof\relax
 
+\usepackage[numbers]{natbib}
 \usepackage{mathptmx}
+\usepackage{eucal}
 \usepackage{helvet}
 \usepackage{courier}
 \usepackage{makeidx}
@@ -24,6 +26,7 @@
 \usepackage{titlecaps}
 \usepackage{fancyhdr}
 \usepackage{amsthm}
+\usepackage{bm}
 
 \graphicspath{{resources/}}
 
@@ -79,9 +82,8 @@ Unmanned Aerial Vehicle}
 
 \maketitle
 
-\begin{abstract}
+
 \input{secs/00-abstract}
-\end{abstract}
 
 \input{secs/01-intro}
 
@@ -96,6 +98,6 @@ Unmanned Aerial Vehicle}
 \input{secs/06-conclusion}
 
 \bibliographystyle{spbasic}
-\thebibliography{bib}
+\bibliography{bib}
 
 \end{document}
