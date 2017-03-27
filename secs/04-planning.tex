@@ -74,16 +74,16 @@ data and the corresponding bounding polygon.
 \label{sec:blindregions}
 
 Using the laser scan data, we can determine which areas in the environment the
-car is unable to sense. We call these areas blind regions. The blind region is
-a rectangle, $B$, with a vertex sequence $\{L_i, L_i + k \cdot \hat{L}_{i, i +
-1}, L_{i + 1} + k \cdot \hat{L}_{i, i + 1}, L_{i + 1}, L_i\}$ where
-$\hat{L}_{i, i + 1}$ is the unit normal for the vector between points $L_i$ and
-$L_{i + 1}$ that points away from the bounding polygon and $k$ is a tuning
-parameter that contributes to the area of the blind region. In practice we only
-care for blind regions where $||L_i - L_{i + 1}||_2 > \delta$ where $\delta$ is
-a tuning parameter. We will use $\B$ to denote the set of all such regions.
-Fig.~\ref{fig:blindregions} shows an example of blind regions in found in a
-found from a laser scan.
+car is unable to sense. We call these areas blind regions. The blind region,
+$\B$, is the set of points contained within a rectangle with a vertex sequence
+$\{L_i, L_i + k \cdot \hat{L}_{i, i + 1}, L_{i + 1} + k \cdot \hat{L}_{i, i +
+1}, L_{i + 1}, L_i\}$ where $\hat{L}_{i, i + 1}$ is the unit normal for the
+vector between points $L_i$ and $L_{i + 1}$ that points away from the bounding
+polygon and $k$ is a tuning parameter that contributes to the area of the blind
+region. In practice we only care for blind regions where $||L_i - L_{i + 1}||_2
+> \delta$ where $\delta$ is a tuning parameter. We will use $\B$ to denote the
+set of all such regions.  Fig.~\ref{fig:blindregions} shows an example of blind
+regions in found in a found from a laser scan.
 
 \begin{figure}[ht]
 
@@ -111,12 +111,25 @@ free path for the quadrotor that maximizes the total observed area of the blind
 regions within a given time horizon. The algorithm builds a search tree
 starting from the current configuration of the quadrotor. It expands leaf nodes
 in descending order of total observed blind region area and only adds new leaf
-nodes to the search that are contained within the bounding polygon. As the
-quadrotor follows the path, the planner is constantly replanning. To avoid
-oscillating between candidate paths, the quadrotor only follows a new path if
-its current path is no longer collision free or if the new path has a larger
-objective value. Algo.~\ref{algo:find_path} formally describes how the path is
-computed.
+nodes to the search that are contained within the bounding polygon. When a
+collision free neighbour is propagated, the orientation, $\theta^*(x, \B)$,
+that maximizes the area of the remaining blind region, $\B$, viewed at that
+configuration, $x$, is also added to the search tree. Below we formally define
+this orientation.
+
+\begin{definition}
+
+    Let $\psi(x, \theta, \B)$ be the set of points visible by the quadrotor at
+    position $x \in \R^3$ with orientation $\theta$. Let $\theta^*(x, \B) =
+    \argmax{0 < \theta \leq 2\pi} \psi(x, \theta, \B)$. For convenience, we
+    define $\psi^*(x, \B) = \psi(x, \theta^*(x, \B), \B)$.
+
+\end{definition}
+
+As the quadrotor follows the path, the planner is constantly replanning. To
+avoid oscillating between candidate paths, the quadrotor only follows a new
+path if its current path is no longer collision free or if the new path has a
+larger objective value.
 
 \begin{algorithm}[h!]
     \caption{Algorithm caption}
@@ -133,7 +146,7 @@ computed.
         \setcounter{ALC@line}{0}
         % \vspace*{1mm}
 
-        \STATE $Q \leftarrow \{(x_0, \phi^*(x_0, \B),
+        \STATE $Q \leftarrow \{(x_0, \theta^*(x_0, \B),
             \B \, \backslash \, \psi^*(x_0, \B))\}$
         \WHILE{$|Q| > 0$}
 
@@ -148,12 +161,12 @@ computed.
                 \RETURN $\Pi$
             \ENDIF
             \FORALL{$x' \in \Function{CollisionFreeNeighbours}(x)$}
-            \STATE $\theta' \leftarrow \phi^*(x', \rB)$
+            \STATE $\theta' \leftarrow \theta^*(x', \rB)$
             \STATE $Q \leftarrow Q \cup \{(x', \theta', \rB \, \backslash \,
                     \psi^*(x', \rB))\}$
                 \STATE $\Function{Parent}(x', \theta') \leftarrow (x, \theta)$
             \ENDFOR
-            \STATE $Q \leftarrow Q \, \backslash \, \{(x, \phi, \rB)\}$
+            \STATE $Q \leftarrow Q \, \backslash \, \{(x, \theta', \rB)\}$
         \ENDWHILE
         \RETURN $\{\}$
 
@@ -161,14 +174,29 @@ computed.
 \end{algorithm}
 
 At the start of Algo.~\ref{algo:find_path}, we initialize a priority queue that
-is used to store the leaf nodes in the search tree. Each node is comprised of
+is used to store the leaf nodes of the search tree. Each node is comprised of
 the position of the quadrotor, $x \in \R^3$, the orientation of the quadrotor
 on the Z-axis, $\theta \in [0, 2\pi]$, and the remaining blind region, $\B$,
 that is left unobserved after the quadrotor reaches $x$ with orientation
-$\theta$. The function $\phi^*(x, \B)$ returns the orientation for $x \in
-\R^3$ that maximizes the area of the blind region $\B$ that is observed.
-Similarly, the function $\psi^*(x, \B)$ returns the set of points that the
-camera is able to observe from $x$, if it had orientation, $\phi^*(x, \B)$.
+$\theta$. Until the search timeout has expired, collision free neighbours of
+$x$ are added to the search along with their maximizing orientation and
+remaining unobserved blind regions.  Once the search has expired, the path,
+$\Pi$ comprised of 3D positions and orientations, that was able to view the
+largest cumulative blind region area starting from $x_0$ is returned.
+Fig.~\ref{fig:planner} shows an example of a path being computed to view the
+blind regions.
+
+\begin{figure}[h!]
+
+    \centering
+
+    \includegraphics[width=1\linewidth]{04planner}
+
+    \caption{}
+
+    \label{fig:planner}
+
+\end{figure}
 
 % \begin{definition}
 %

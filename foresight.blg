@@ -2,12 +2,17 @@ This is BibTeX, Version 0.99d (TeX Live 2016)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: foresight.aux
 The style file: spbasic.bst
-I found no \citation commands---while reading file foresight.aux
 I found no \bibdata command---while reading file foresight.aux
+Warning--I didn't find a database entry for "ASIR2016"
+Warning--I didn't find a database entry for "NHTSA_crash_stats"
+Warning--I didn't find a database entry for "Toyota_patent"
+Warning--I didn't find a database entry for "bradley2016tesla"
+Warning--I didn't find a database entry for "Dagan_IVS_2004"
+Warning--I didn't find a database entry for "naegeli17letters"
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 You've used 0 entries,
             3270 wiz_defined-function locations,
-            665 strings with 4772 characters,
+            675 strings with 4908 characters,
 and the built_in function-call counts, 35 in all, are:
 = -- 0
 > -- 0
@@ -46,4 +51,4 @@ warning$ -- 0
 while$ -- 0
 width$ -- 0
 write$ -- 9
-(There were 2 error messages)
+(There was 1 error message)
