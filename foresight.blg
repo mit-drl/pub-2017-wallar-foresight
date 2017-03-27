@@ -2,53 +2,52 @@ This is BibTeX, Version 0.99d (TeX Live 2016)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: foresight.aux
 The style file: spbasic.bst
-I found no \bibdata command---while reading file foresight.aux
-Warning--I didn't find a database entry for "ASIR2016"
-Warning--I didn't find a database entry for "NHTSA_crash_stats"
-Warning--I didn't find a database entry for "Toyota_patent"
-Warning--I didn't find a database entry for "bradley2016tesla"
-Warning--I didn't find a database entry for "Dagan_IVS_2004"
-Warning--I didn't find a database entry for "naegeli17letters"
+Database file #1: bib.bib
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
-You've used 0 entries,
+Warning--to sort, need author or key in NHTSA_crash_stats
+Warning--empty year in ASIR2016; set to ????
+`journal' is a missing field, not a string, for entry ASIR2016
+while executing---line 1650 of file spbasic.bst
+Warning--empty journal in ASIR2016
+You've used 6 entries,
             3270 wiz_defined-function locations,
-            675 strings with 4908 characters,
-and the built_in function-call counts, 35 in all, are:
-= -- 0
-> -- 0
-< -- 0
-+ -- 0
-- -- 0
-* -- 2
-:= -- 8
-add.period$ -- 0
-call.type$ -- 0
-change.case$ -- 0
-chr.to.int$ -- 0
-cite$ -- 0
-duplicate$ -- 0
-empty$ -- 1
-format.name$ -- 0
-if$ -- 1
+            707 strings with 5760 characters,
+and the built_in function-call counts, 5251 in all, are:
+= -- 512
+> -- 143
+< -- 3
++ -- 57
+- -- 45
+* -- 400
+:= -- 688
+add.period$ -- 4
+call.type$ -- 6
+change.case$ -- 48
+chr.to.int$ -- 6
+cite$ -- 11
+duplicate$ -- 492
+empty$ -- 429
+format.name$ -- 56
+if$ -- 1084
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 0
-newline$ -- 10
-num.names$ -- 0
-pop$ -- 0
+missing$ -- 49
+newline$ -- 28
+num.names$ -- 20
+pop$ -- 146
 preamble$ -- 1
-purify$ -- 0
+purify$ -- 39
 quote$ -- 0
-skip$ -- 1
+skip$ -- 174
 stack$ -- 0
-substring$ -- 0
-swap$ -- 0
-text.length$ -- 0
+substring$ -- 446
+swap$ -- 196
+text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 0
-warning$ -- 0
-while$ -- 0
+type$ -- 54
+warning$ -- 3
+while$ -- 38
 width$ -- 0
-write$ -- 9
+write$ -- 70
 (There was 1 error message)
