@@ -5,6 +5,7 @@ foresight.synctex.gz
 ##### --- TeX --- #####
 ## Core latex/pdflatex auxiliary files:
 *.aux
+*.bbl
 *.blg
 *.lof
 *.log
