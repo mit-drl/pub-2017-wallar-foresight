@@ -2,27 +2,51 @@
 
 \section{Problem formulation}
 
-We consider a ground vehicle with XY sensors. 
-A quad with Z sensors...
-Image of the car with the quad.
+We consider a ground vehicle with 2D laser scanner. We also consider a
+lightweight companion quadrotor with a front facing camera. Given a laser scan
+from the ground vehicle and its position, we would like to compute a path for
+the quadrotor that is able to observe the occluded areas, detect possibly
+unsafe obstructions such as pedestrians, and report back to the vehicle.
 
-\begin{problem}
-Given the local map as seen by the car, compute a minimal cost path for the drone to explore the unseen areas.
-\end{problem}
+Our problem is two pronged. First we need to be able to accurately localize the
+quadrotor in the same reference frame as the vehicle. Second, we need to
+determine which areas of the environment are occluded to ground vehicle, and
+compute a safe path that leads the quadrotor to view these regions.
 
-Our approach consist of ...
-
-We used a Parrot Bebop 2 as the quadcopter. It is equipped with a camera,
-and velocity and altitude measurements can be read from its SDK at a rate of
-5 Hz. The Bebop uses a software gimbal to stabilize the camera image.
-
-The inputs to the Bebop are roll angle $\phi$, pitch angle $\theta$, 
-yaw rate $\omega$, and z velocity $\dot{z}$. We use
-PID controllers to control the inputs.
-
-$$ u = [\phi, \theta, \omega, \dot{z}] $$
+% % \begin{problem}
+% %
+% %     Given a laser scan from the ground vehicle, compute a path the maximizes
+% %     the occluded area observed by the quadrotor for a given time horizon.
+% % \end{problem}
+%
+% We used a Parrot Bebop 2 as the quadcopter. It is equipped with a camera, and
+% velocity and altitude measurements can be read from its SDK at a rate of 5 Hz.
+% The Bebop uses a software gimbal to stabilize the camera image.
+%
+% The inputs to the Bebop are roll angle $\phi$, pitch angle $\theta$, 
+% yaw rate $\omega$, and z velocity $\dot{z}$. We use
+% PID controllers to control the inputs.
+%
+% $$ u = [\phi, \theta, \omega, \dot{z}] $$
 
 \subsection{Method overview}
-Overview communication.
 
-Overview exploration algorithm.
+We accurately localize the quadrotor relative to the ground vehicle by fusing
+measurements from ultra-wideband radios mounted on the ground vehicle with the
+on-board odometry estimates from a down facing optical flow sensor and IMU
+mounted on the quadrotor. We use an unscented Kalman filter to fuse these
+measurements and produce an estimate of quads 3D position relative to the
+ground vehicle.
+
+We use an anytime sampling based algorithm to compute a collision free path
+that maximizes the area of the occluded areas viewed by the quadrotor. Our
+algorithm uses the laser scan from the ground vehicle the find the occluded
+regions and builds a search tree from the quadrotor's current configuration
+towards these regions. The search terminates when a timeout has expired and
+returns the path that currently maximizes the occluded area viewed by the
+quadrotor.
+
+To detect possible unsafe obstructions in the occluded areas, we use
+YOLO~\cite{yolo}, real time object detecting convolutional neural network which
+is able to classify and locate objects such as pedestrians, cars, bicycles,
+etc, in monocular images.
