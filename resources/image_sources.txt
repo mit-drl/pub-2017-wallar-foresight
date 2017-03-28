@@ -9,3 +9,6 @@ http://www.decawave.com/sites/default/files/styles/front_page_slider_image/publi
 
 radio_waves.png:
 https://img.clipartfest.com/694f06c0321821941b0e8881f3c7d472_radio-waves-clipart-radio-waves_640-613.png
+
+axes.png:
+https://i.stack.imgur.com/SitTF.png
