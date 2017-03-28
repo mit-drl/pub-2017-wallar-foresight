@@ -57,7 +57,7 @@ quadrotor used the experiments.
 
     \centering
 
-    \includegraphics[width=0.9\linewidth]{bebop-actual}
+    \includegraphics[width=0.7\linewidth]{bebop-actual}
     % \includegraphics[height=3.8cm]{car}
     % \includegraphics[height=3.8cm]{bebop-actual}
 
@@ -78,18 +78,50 @@ then follows the car into the garage and autonomously lands on the platform.
 
 \subsection{Experiment With Actual Quadrotor}
 
+\subsubsection{Looking Around the Corner}
+
+Fig.~\ref{fig:experiment} shows snapshots of the experiment as it progressed.
+The first column is a third person angle of the Prius and the quadrotor. The
+second column shows frames from the quadrotor's on-board camera along with
+object detection and classifications from the convolutional neural net. The
+third column is a visualization of the sensor data from the car, the bounding
+polygon, blind regions, and the quadrotor's plan. Each row shows a single
+snapshot from the experiment.
+
+We can see from the snapshots that the quadrotor is able to successfully take
+off from the car, use the laser scan to find the blind regions, and plan a path
+to look around the corner in the garage. From the last row, we also see that
+our system is able to detect that there is a pedestrian around the corner and
+provide the bounding box to the either the driver or an autonomous system
+operating the car.
+
+Note that even though the quadrotor is not equipped with the sensors needed to
+perform robust 3D obstacle avoidance, it is able to avoid collisions and fly
+through the open garage door using the laser scan from the car.
+
 \begin{figure}[h!]
 
     \centering
 
-    \includegraphics[width=0.3\linewidth]{00-third-person}
-    \includegraphics[width=0.3\linewidth]{00-quad-cam}
-    \includegraphics[width=0.3\linewidth]{00-planner-step} \\
-    \includegraphics[width=0.3\linewidth]{01-third-person}
-    \includegraphics[width=0.3\linewidth]{01-quad-cam}
-    \includegraphics[width=0.3\linewidth]{01-planner-step} \\
-    \includegraphics[width=0.3\linewidth]{02-third-person}
-    \includegraphics[width=0.3\linewidth]{02-quad-cam}
-    \includegraphics[width=0.3\linewidth]{02-planner-step}
+    \includegraphics[width=0.35\linewidth]{00-third-person}
+    \includegraphics[width=0.35\linewidth]{00-quad-cam}
+    \includegraphics[width=0.28\linewidth]{00-planner-step} \\
+    \vspace*{1mm}
+    \includegraphics[width=0.35\linewidth]{01-third-person}
+    \includegraphics[width=0.35\linewidth]{01-quad-cam}
+    \includegraphics[width=0.28\linewidth]{01-planner-step} \\
+    \vspace*{1mm}
+    \includegraphics[width=0.35\linewidth]{02-third-person}
+    \includegraphics[width=0.35\linewidth]{02-quad-cam}
+    \includegraphics[width=0.28\linewidth]{02-planner-step}
+
+    \caption{}
+
+    \label{fig:experiment}
 
 \end{figure}
+
+\subsubsection{Landing On the Car}
+
+Once the car is ready to park, the quadrotor is able to autonomously land back
+on the platform attached to the front bumper.
