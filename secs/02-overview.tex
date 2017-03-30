@@ -1,17 +1,24 @@
 % !TEX root = ../foresight.tex
 
-\section{Problem formulation}
+\section{Method overview}
 
-We consider a ground vehicle with 2D laser scanner. We also consider a
-lightweight companion quadrotor with a front facing camera. Given a laser scan
-from the ground vehicle and its position, we would like to compute a path for
-the quadrotor that is able to observe the occluded areas, detect possibly
-unsafe obstructions such as pedestrians, and report back to the vehicle.
+We consider two vehicles.
+\begin{itemize}
+\item
+A ground vehicle - the car -, which can create a local map of the environment, localize with respect to it and autonomously navigate \cite{Add citation to Felix's IV paper}. We utilize a 2D grid map to represent the free space and obstacles seen by the car. In particular, our vehicle is equipped with a 2D LIDAR. 
+\item
+A lightweight companion quadrotor \cite{Parrot Bebop 2} equipped with a front facing camera. The drone is able to fly autonomously to/from the ground vehicle and detect obstacles that were originally occluded for the ground vehicle.
+\end{itemize}
 
-Our problem is two pronged. First we need to be able to accurately localize the
-quadrotor in the same reference frame as the vehicle. Second, we need to
-determine which areas of the environment are occluded to ground vehicle, and
-compute a safe path that leads the quadrotor to view these regions.
+Given a laser scan from the ground vehicle, our objective is to:
+a) determine which areas of the environment are occluded to ground vehicle,
+b) compute a safe path for the aerial vehicle to observe the occluded areas, and
+c) detect unseen obstacles, such as pedestrians, and report them back to the ground vehicle.
+
+% Our problem is two pronged. First we need to be able to accurately localize the
+% quadrotor in the same reference frame as the vehicle. Second, we need to
+% determine which areas of the environment are occluded to ground vehicle, and
+% compute a safe path that leads the quadrotor to view these regions.
 
 % % \begin{problem}
 % %
@@ -29,24 +36,19 @@ compute a safe path that leads the quadrotor to view these regions.
 %
 % $$ u = [\phi, \theta, \omega, \dot{z}] $$
 
-\subsection{Method overview}
+%\subsection{Method overview}
 
-We accurately localize the quadrotor relative to the ground vehicle by fusing
-measurements from ultra-wideband radios mounted on the ground vehicle with the
-on-board odometry estimates from a down facing optical flow sensor and IMU
-mounted on the quadrotor. We use an unscented Kalman filter to fuse these
-measurements and produce an estimate of quads 3D position relative to the
-ground vehicle.
+To accurately localize the quadrotor relative to the ground vehicle, we equip the ground vehicle with several Ultra-wideband radios. In the quadrotor, we fuse, via an Unscented Kalman filter (UKF) relative information from a UWB radio with odometry estimates from a down facing optical flow sensor and an onboard IMU.
+% We use an unscented Kalman filter to fuse these
+% measurements and produce an estimate of quads 3D position relative to the
+% ground vehicle.
 
-We use an anytime sampling based algorithm to compute a collision free path
-that maximizes the area of the occluded areas viewed by the quadrotor. Our
-algorithm uses the laser scan from the ground vehicle the find the occluded
-regions and builds a search tree from the quadrotor's current configuration
-towards these regions. The search terminates when a timeout has expired and
-returns the path that currently maximizes the occluded area viewed by the
-quadrotor.
-
-To detect possible unsafe obstructions in the occluded areas, we use
-YOLO~\cite{yolo}, real time object detecting convolutional neural network which
-is able to classify and locate objects such as pedestrians, cars, bicycles,
-etc, in monocular images.
+Our algorithm operates directly on the laser scan from the ground vehicle to find occluded
+regions.
+We then employ an anytime sampling-based algorithm to compute a collision free path for the drone
+that maximizes the occluded area viewed by the quadrotor.
+% and builds a search tree from the quadrotor's current configuration
+% towards these regions. The search terminates when a timeout has expired and
+% returns the path that currently maximizes the occluded area viewed by the
+% quadrotor.
+To detect obstacles within the occluded areas, we employ a real-time object detecting convolutional neural network~\cite{yolo}, which is able to classify and locate objects, such as pedestrians, cars, bicycles, in monocular images. These obstacles are then reported back to the ground vehicle.
