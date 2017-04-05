@@ -66,13 +66,13 @@ paper, we present a method for relative localization using ultra-wideband radios
 %the quadcopter to safely navigate to blind spots and then land back on the car.
 
 
-\subsection{Related works}
+%\subsection{Related works}
 
-Motion planning for autonomous cars. Some methods assume full knowledge of the environment [] -> not realistic, while others [] only have local sensing. Our method would work in parallel and provide a "better" map.
+%Motion planning for autonomous cars. Some methods assume full knowledge of the environment [] -> not realistic, while others [] only have local sensing. Our method would work in parallel and provide a "better" map.
 
-Multi-robot mapping -> Vijay Kumar, Scaramuzza and others. Drone + ground robot.
-
-Informative planning and exploration -> V. Kumar, D. Rus, R. Siegwart.
+Our method presents similarities with multi-robot mapping. For instance \cite{Michael:2012gl} and \cite{Forster:2013kn} combined the maps from a ground and an aerial robot for enhanced exploration and \cite{Delmerico:2017vq} employed a map created by an aerial robot for planning the motion of a ground robot.
+%Our method explores the frontiers of the map built by the ground robot and is similar to exploration \cite{}.
+Our idea is similar, yet we focus on the context of safe autonomous driving in cluttered urban environments.
 
 Quadrotors have been able to track a moving vehicle using visual techniques
 such as AprilTag localization \cite{borowczyk2016autonomous}, optical flow \cite{herisse2012landing},
@@ -86,9 +86,9 @@ smartphone GPS receivers is 4.9 m \cite{gpsaccuracy}.
 
 Ultra-wideband range sensors have in recent years become a popular tool for
 localization of quadrotors, particularly in indoor GPS-denied environments, since they can
-provide distance measurements with an accuracy of <10cm and a range of
-up to 300 m \cite{Decwave_Website}. Indoor localization of quadrotors has 
-been achieved by placing UWB 'anchors'
+provide distance measurements with an accuracy of 10 cm and a range of
+up to 300 m\footnote{Decawave}.
+Indoor localization of quadrotors has been achieved by placing UWB 'anchors'
 around the perimeter of a room and attaching a UWB 'tag' on the quadrotor.
 Using this technique, \cite{mueller2015fusing} has achieved average localization error of 4-25 cm;
 \cite{kempke2016harmonium} an average error of 9 cm; and \cite{benini2013imu}
