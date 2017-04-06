@@ -10,15 +10,15 @@
 %
 % \end{figure}
 
-Globally, over 3000 people die \emph{every day} \cite{ASIR2016} in vehicle-related accidents and over one hundred thousand are injured or disabled on average.
+Globally, over 3000 people die in vehicle-related accidents and over one hundred thousand are injured or disabled on average \emph{every day} \cite{ASIR2016}.
 % Worse still is that this number is continuing to increase \cite{NSC2016Fatality}.
 In the United States, over 90\% of these accidents were due to human error \cite{NHTSA_crash_stats}.
 This has resulted in the continued development of advanced safety systems by commercial car manufacturers.
 %Safety systems in automobiles are undergoing rapid development to address the fact troubling continued increase in traffic injuries and fatalities \cite{NSC2016Fatality}. 
-For example, systems exist to automatically brake in the case of unexpected obstacles \cite{Toyota_patent}, maintain a car in a lane at a given speed \cite{bradley2016tesla}, alert users of pedestrians, signage, and other vehicles on the roadway \cite{Dagan_IVS_2004}. These systems will make our cars safer and eventually autonomous.
-However many accidents are due to blind spots, for example when a vehicle takes a turn with poor visibility or when a pedestrian crosses from behind a parked vehicle. In these accidents, vulnerable road users, i.e. pedestrians and bikers, are typically involved and the consequences are dramatic.
+For example, systems exist to automatically brake in the case of unexpected obstacles \cite{Toyota_patent}, maintain a car in a lane at a given speed \cite{bradley2016tesla}, and alert users of pedestrians, signage, and other vehicles on the roadway \cite{Dagan_IVS_2004}. These systems will make our cars safer and eventually autonomous.
+However, many accidents are due to blind spots, for example when a vehicle takes a turn with poor visibility or when a pedestrian crosses from behind a parked vehicle. In these accidents, vulnerable road users, i.e. pedestrians and bikers, are typically involved and the consequences are dramatic.
 
-We propose to extend the perception capabilities of a vehicle, autonomous or human-driven, with a small Unnamed Aerial Vehicle (UAV) capable of taking off from the car, flying around the corner to gather additional data from the blind spots and landing back in the car after a mission. Small UAVs are highly mobile and agile and recent developments have made it possible to capture autonomously aerial footage \cite{naegeli17letters}.
+We propose to extend the perception capabilities of a vehicle, autonomous or human-driven, with a small Unmanned Aerial Vehicle (UAV) capable of taking off from the car, flying around corners to gather additional data from blind spots and landing back on the car after a mission. Small UAVs are highly mobile and agile and recent developments have made it possible to capture aerial footage autonomously\cite{naegeli17letters}.
 The quadcopter could use the car as a charging base,
 while the car could send the quadcopter out on missions to scout ahead and
 fill in the blind spots in its vision.
@@ -27,7 +27,9 @@ A crucial step in enabling a small UAV and an autonomous car to work
 together is to ensure that there exists an accurate pose transform between the car
 and the quadcopter. The accuracy of GPS is not sufficient when the UAV must navigate
 obstacle-filled environments (such as a city center) or land on the car. In this 
-paper, we present a method for relative localization using ultra-wideband radios to measure the relative position of the quadcopter relative to the car with an accuracy of 10cm. This information is fused with the internal state estimation to enable the UAV to safely navigate to blind spots and then land back on the car. Furthermore, we have developed a path planning algorithm for remote sensing and have implemented a Deep Neural Network to detect obstacles, such as pedestrians, from the UAV.
+paper, we present a method for relative localization using ultra-wideband radios to measure the relative position of the quadcopter relative to the car with an accuracy of <14cm. This information is fused with the internal state estimation to enable the UAV to safely navigate to blind spots and then land back on the car. Furthermore, we have developed a path planning algorithm for remote sensing and have carried out experiments using a quadrotor and a car.
+
+%implemented a Deep Neural Network to detect obstacles, such as pedestrians, from the UAV.
 
 
 %Introduction: Lots of accidents due to not seeing what's going on. For example a pedestrian or a biker behind a car. Could be similar to the motivation in Wilko's paper.
@@ -64,13 +66,43 @@ paper, we present a method for relative localization using ultra-wideband radios
 %the quadcopter to safely navigate to blind spots and then land back on the car.
 
 
-\subsection{Related works}
+%\subsection{Related works}
 
-Motion planning for autonomous cars. Some methods assume full knowledge of the environment [] -> not realistic, while others [] only have local sensing. Our method would work in parallel and provide a "better" map.
+%Motion planning for autonomous cars. Some methods assume full knowledge of the environment [] -> not realistic, while others [] only have local sensing. Our method would work in parallel and provide a "better" map.
 
-Multi-robot mapping -> Vijay Kumar, Scaramuzza and others. Drone + ground robot.
+Our method presents similarities with multi-robot mapping. For instance \cite{Michael:2012gl} and \cite{Forster:2013kn} combined the maps from a ground and an aerial robot for enhanced exploration and \cite{Delmerico:2017vq} employed a map created by an aerial robot for planning the motion of a ground robot.
+%Our method explores the frontiers of the map built by the ground robot and is similar to exploration \cite{}.
+Our idea is similar, yet we focus on the context of safe autonomous driving in cluttered urban environments.
 
-Informative planning and exploration -> V. Kumar, D. Rus, R. Siegwart.
+Quadrotors have been able to track a moving vehicle using visual techniques
+such as AprilTag localization \cite{borowczyk2016autonomous}, optical flow \cite{herisse2012landing},
+and infrared markers \cite{wenzel2011automatic}. However, a weakness of visual systems
+is that the visual cues on the ground vehicle must be in the field of view and line
+of sight of the quadrotor-mounted camera. Moreover, the lighting conditions must be suitable
+for the cameras. These restrictions limit the usefulness of visual tracking. Meanwhile,
+GPS tracking, while useful in long-range outdoors scenarios, is not accurate enough for 
+maneuvers such as landing and obstacle avoidance. For example, average accuracy in
+smartphone GPS receivers is 4.9 m \cite{gpsaccuracy}.
+
+Ultra-wideband range sensors have in recent years become a popular tool for
+localization of quadrotors, particularly in indoor GPS-denied environments, since they can
+provide distance measurements with an accuracy of 10 cm and a range of
+up to 300 m\footnote{Decawave}.
+Indoor localization of quadrotors has been achieved by placing UWB 'anchors'
+around the perimeter of a room and attaching a UWB 'tag' on the quadrotor.
+Using this technique, \cite{mueller2015fusing} has achieved average localization error of 4-25 cm;
+\cite{kempke2016harmonium} an average error of 9 cm; and \cite{benini2013imu}
+an average error of 10 cm.
+
+The problem of relative localization is more challenging because the UWB tag is outside of
+the perimeter of the anchors. However, in \cite{tobiuwb}, a quadrotor
+outfitted with four UWBs was able to follow a person carrying a UWB tag
+with <10 cm mean error. The authors achieved this accuracy using an
+iterated Extended Kalman Filter. Building off of this work, we used
+6 UWB sensors on a car to localize a UWB on a quadrotor with an
+average mean error of 13.7 cm. Moreover, unlike in previous systems,
+we take advantage of the accurate relative transform to use the sensors
+on the car to plan safe paths for the quadrotor.
 
 \subsection{Contribution}
 

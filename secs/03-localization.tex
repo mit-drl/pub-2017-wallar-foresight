@@ -24,9 +24,9 @@ $$
 $$
 
 We receive a range measurement $r_i$ from each UWB in its own frame. 
-From the quadrotor we receive velocity measurements $\bm{v}$ in the odom frame,
-a yaw reading $\psi_q$ in the world frame, and an altitude measurement $z_a$ in 
-the world frame. Given $n$ UWBs, we define the measurement vector as
+From the quadrotor we receive velocity measurements $\bm{v}$, a yaw reading $\psi_q$,
+and an altitude measurement $z_a$ in an ENU-aligned world frame.
+Given $n$ UWBs, we define the measurement vector as
 
 $$
    z = [r_1, \dots, r_n, \bm{v}, z_a, \psi_q] \in \R^{n+5}
