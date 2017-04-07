@@ -2,6 +2,8 @@
 
 \section{Introduction}
 
+\ja{Add reference to all figures, tables and algorithms in the text.}
+
 % <<<<<<< HEAD
 % \begin{figure}
 %     \centering
@@ -10,7 +12,7 @@
 %
 % \end{figure}
 
-Globally, over 3000 people die in vehicle-related accidents and over one hundred thousand are injured or disabled on average \emph{every day} \cite{ASIR2016}.
+Globally, over 3000 people loose their lives in vehicle-related accidents and over one hundred thousand are injured or disabled on average \emph{every day} \cite{ASIR2016}.
 % Worse still is that this number is continuing to increase \cite{NSC2016Fatality}.
 In the United States, over 90\% of these accidents were due to human error \cite{NHTSA_crash_stats}.
 This has resulted in the continued development of advanced safety systems by commercial car manufacturers.
@@ -106,25 +108,17 @@ on the car to plan safe paths for the quadrotor.
 
 \subsection{Contribution}
 
-This paper presents a method for using a quadrotor to autonomously inspect
-occluded areas for a sensor-equipped car and detect unsafe obstructions such as
-pedestrians and other vehicles.
+This paper presents a method for augmenting the sensing capabilities of self-driving cars.
+In particular, we employ a small aerial vehicle (quadrotor) to autonomously inspect areas that are occluded for the car and detect unsafe situations early enough, such as
+pedestrians and bikers in blind sports or other vehicles in blind intersections.
 
-This paper presents a method augment what a self-driving car can see.
-- Occlusions limit the field of view of the car
-- A small UAV can fly to explore those blind spots and prevent accidents
-- Informative / exploration planning algorithm for the UAV
-- Open source communication framework for multi-robot systems
-- Experiments with real data captured from our car 
+% This paper presents a method augment what a self-driving car can see.
+% - Occlusions limit the field of view of the car
+% - A small UAV can fly to explore those blind spots and prevent accidents
+% - Informative / exploration planning algorithm for the UAV
+% - Open source communication framework for multi-robot systems
+% - Experiments with real data captured from our car 
 
-\begin{itemize}
-\item
-Method for finding the relative transform between two mobile robots
-\item
-Method for informative sensing
-\item
-Experiments that prove that the quadcopter can accurately navigate
-to blind spots and land back on the car.
-\end{itemize}
+Our holistic method contributes an algorithm for informative exploration of occluded spots in the local map built by the ground vehicle. To achieve this, we also provide a ROS-based open source communication framework for multi-robot systems and a UWB-based localization system.
 
-We validate our approach with data collected with our self-driving vehicle and a small UAV.
+We validate our approach with experiments with our self-driving vehicle and a small UAV. Our experiments show that the quadcopter can accurately navigate to blind spots, find occluded pedestrians and land back on the car.

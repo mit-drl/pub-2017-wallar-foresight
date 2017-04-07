@@ -2,6 +2,8 @@
 
 \section{Results}
 
+In this section we provide experimental results that validate our approach. A video accompanies this submission and is available at \ja{add link to website}.
+
 \subsection{Localization Accuracy}
 
 We tested our localization framework by emulating the car's ultra-wideband
@@ -14,7 +16,7 @@ using the motion capture markers. The average error in our localization was
 13.7 cm, or 35.9\% the length of the quadrotor. Fig.~\ref{fig:localization}
 shows how our localization compares to the ground truth. The green and red
 lines respectively show the ground truth and predicted positions of the
-quadrotor.
+quadrotor.\ja{How come it is worse than the reported errors in the UWB paper that we are citing?}
 
 \begin{figure}
 
@@ -22,7 +24,7 @@ quadrotor.
 
     \includegraphics[width=0.7\linewidth]{localization}
 
-    \caption{Plot showing the how our localization method compares to the
+    \caption{Comparison of our localization method with respect to
     ground truth. Ground truth was supplied by a motion capture system.}
 
     \label{fig:localization}
@@ -76,7 +78,7 @@ leave the garage when there are no more pedestrians detected by the quadrotor.
 Once the car is ready to return, it backs up into the garage. The quadrotor
 then follows the car into the garage and autonomously lands on the platform.
 
-\subsection{Experiment With Actual Quadrotor}
+\subsection{Experiment With Quadrotor}
 
 \subsubsection{Looking Around the Corner}
 
