@@ -2,6 +2,8 @@
 
 \section{Introduction}
 
+\ja{Add reference to all figures, tables and algorithms in the text.}
+
 % <<<<<<< HEAD
 % \begin{figure}
 %     \centering
@@ -10,7 +12,7 @@
 %
 % \end{figure}
 
-Globally, over 3000 people die in vehicle-related accidents and over one hundred thousand are injured or disabled on average \emph{every day} \cite{ASIR2016}.
+Globally, over 3000 people loose their lives in vehicle-related accidents and over one hundred thousand are injured or disabled on average \emph{every day} \cite{ASIR2016}.
 % Worse still is that this number is continuing to increase \cite{NSC2016Fatality}.
 In the United States, over 90\% of these accidents were due to human error \cite{NHTSA_crash_stats}.
 This has resulted in the continued development of advanced safety systems by commercial car manufacturers.
@@ -87,10 +89,10 @@ smartphone GPS receivers is 4.9 m \cite{gpsaccuracy}.
 Ultra-wideband range sensors have in recent years become a popular tool for
 localization of quadrotors, particularly in indoor GPS-denied environments, since they can
 provide distance measurements with an accuracy of 10 cm and a range of
-up to 300 m\footnote{Decawave}.
-Indoor localization of quadrotors has been achieved by placing UWB 'anchors'
-around the perimeter of a room and attaching a UWB 'tag' on the quadrotor.
-Using this technique, \cite{mueller2015fusing} has achieved average localization error of 4-25 cm;
+up to 300 m\footnote{Decawave}.  Indoor localization of quadrotors has been
+achieved by placing UWB "anchors" around the perimeter of a room and attaching
+a UWB "tag" on the quadrotor.  Using this technique, \cite{mueller2015fusing}
+has achieved average localization error of 4-25 cm;
 \cite{kempke2016harmonium} an average error of 9 cm; and \cite{benini2013imu}
 an average error of 10 cm.
 
@@ -106,6 +108,7 @@ on the car to plan safe paths for the quadrotor.
 
 \subsection{Contribution}
 
+% <<<<<<< HEAD
 This paper presents a method for extending the sensing capabilities of
 self-driving vehicles by using a small quadrotor to autonomously locate and
 observe regions occluded to the vehicle and detect potentially unsafe obstacles
@@ -124,3 +127,19 @@ such as pedestrians or other cars. Our contributions include
         Parrot Bebop 2 quadrotor
 
 \end{itemize}
+% =======
+% This paper presents a method for augmenting the sensing capabilities of self-driving cars.
+% In particular, we employ a small aerial vehicle (quadrotor) to autonomously inspect areas that are occluded for the car and detect unsafe situations early enough, such as
+% pedestrians and bikers in blind sports or other vehicles in blind intersections.
+%
+% % This paper presents a method augment what a self-driving car can see.
+% % - Occlusions limit the field of view of the car
+% % - A small UAV can fly to explore those blind spots and prevent accidents
+% % - Informative / exploration planning algorithm for the UAV
+% % - Open source communication framework for multi-robot systems
+% % - Experiments with real data captured from our car 
+%
+% Our holistic method contributes an algorithm for informative exploration of occluded spots in the local map built by the ground vehicle. To achieve this, we also provide a ROS-based open source communication framework for multi-robot systems and a UWB-based localization system.
+%
+% We validate our approach with experiments with our self-driving vehicle and a small UAV. Our experiments show that the quadcopter can accurately navigate to blind spots, find occluded pedestrians and land back on the car.
+% >>>>>>> 7e7c728f4f915014eb8c483f0f8e35c626a055ff

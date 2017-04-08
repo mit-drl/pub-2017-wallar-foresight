@@ -46,7 +46,7 @@ is used in the rest of the paper.
 
 \end{definition}
 
-From the laser scan, we can easily produce a bounding polygon. The bounding
+From the laser scan, we compute a bounding polygon. The bounding
 polygon is defined as the minimum area simple polygon that contains all the
 points in the laser scan. Since the laser scan data is ordered by $\theta_i$
 from $\theta_{\min}$ to $\theta_{\max}$, the bounding polygon can be
@@ -122,14 +122,14 @@ this orientation.
     Let $\psi(x, \theta, \B)$ be the set of points visible by the quadrotor at
     position $x \in \R^3$ with orientation $\theta$. Let $\theta^*(x, \B) =
     \argmax{0 < \theta \leq 2\pi} \psi(x, \theta, \B)$. For convenience, we
-    define $\psi^*(x, \B) = \psi(x, \theta^*(x, \B), \B)$.
+    define $\psi^*(x, \B) = \psi(x, \theta^*(x, \B), \B)$. \ja{What are the visiblie points?}
 
 \end{definition}
 
 As the quadrotor follows the path, the planner is constantly replanning. To
 avoid oscillating between candidate paths, the quadrotor only follows a new
 path if its current path is no longer collision free or if the new path has a
-larger objective value.
+larger objective value. \ja{ADD caption to algorithm and figure!}
 
 \begin{algorithm}[h!]
     \caption{Algorithm caption}

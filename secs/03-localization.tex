@@ -2,28 +2,7 @@
 
 \section{Relative pose localization}
 
-\begin{figure}
-  \centering
-    \includegraphics[width=\textwidth]{foresight_frames}
-  \caption{The frames and measurements of our system. The base frame
-   is the car's body frame. We measure transforms $\bm{t_{i}}$ from the body
-   frame to every UWB tag. The quadrotor measures height and yaw in the world
-   frame. The velocity controller uses the odom-to-base\textunderscore 
-   link transform to calculate commands to control the quadcopter's velocity.
-   Planning is done in the car's body frame.
-   The UWBs make range measurements $r_{i}$. A position estimate $\bm{\hat{p}}$
-   is calculated by solving for the least squares error between $r_{i}$ and $\bm{\hat{p}}$.}
-  \label{fig:frames}
-\end{figure}
-
-Our planner is concerned with the position $\bm{p}$ and yaw orientation $\psi$
-of the quadrotor measured in the car's body frame. We therefore describe the state of the quadrotor as
-
-$$
-    x = [\bm{p}, \psi] \in \R^4
-$$
-
-We receive a range measurement $r_i$ from each UWB in its own frame. 
+From each Ultrawide Band (UWB) tag we receive a range measurement $r_i$ in its own frame. 
 From the quadrotor we receive velocity measurements $\bm{v}$, a yaw reading $\psi_q$,
 and an altitude measurement $z_a$ in an ENU-aligned world frame.
 Given $n$ UWBs, we define the measurement vector as
@@ -43,13 +22,13 @@ $$
 
 Yaw orientation is calibrated at the start by lining up the quadrotor along the car's x-axis
 and measuring the yaw offset $\psi_{off}$ between the car and the quadrotor.
-We can therefore calculate $\psi$ as
+The yaw of the quadrotor is then given by
 $$
    \psi = \psi_q - \psi_{off}
 $$
 
 One challenge we encountered in estimating the 3D position of the quadrotor was that
-the UWBs gave bad readings when the UWB on the quadrotor was out of their plane.
+the distance measurements from the UWBs showed larger errors when the UWB on the quadrotor was out of their plane.
 We therefore first estimate $\bm{\hat{p}^{odom}}$ using only use the quadrotor's onboard 
 odometry readings $\bm{v}$ and $z_a$ as the inputs to a UKF. We then use the estimated
 height, $\bm{\hat{p}_z^{odom}}$ with the UWB range
@@ -66,7 +45,7 @@ We then find $\bm{\hat{p}^{xy}}$ by solving the nonlinear least squares optimiza
     \min_{{\bm{\hat{p}^{xy}}}} \sum_{i=1}^{n} ((r_{i}^{proj})^2 - \lVert \bm{\hat{p}^{xy}} - \bm{t_i^{xy}}\rVert^2)^2
 \end{align*}
 
-with the Jacobian
+with the Jacobian \ja{with respect to what? P? If so, I think it is not correct. Please check.}
 
 $$
     J = 4((r_i^{proj})^2 - \lVert \bm{\hat{p}^{xy}} - \bm{t_i^{xy}} \rVert^2)(\bm{t_i^{xy}} - \bm{\hat{p}^{xy}})
@@ -86,8 +65,19 @@ $$
 $$
 
 
-
-
+\begin{figure}[tb!]
+  \centering
+    \includegraphics[width=\textwidth]{foresight_frames}
+  \caption{The frames and measurements of our system. The base frame
+   is the car's body frame. We measure transforms $\bm{t_{i}}$ from the body
+   frame to every UWB tag. The quadrotor measures height and yaw in the world
+   frame. The velocity controller uses the odom-to-base\textunderscore 
+   link transform to calculate commands to control the quadcopter's velocity.
+   Planning is done in the car's body frame.
+   The UWBs make range measurements $r_{i}$. A position estimate $\bm{\hat{p}}$
+   is calculated by solving for the least squares error between $r_{i}$ and $\bm{\hat{p}}$.}
+  \label{fig:frames}
+\end{figure}
 
 
 
