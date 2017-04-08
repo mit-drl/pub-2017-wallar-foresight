@@ -106,21 +106,21 @@ on the car to plan safe paths for the quadrotor.
 
 \subsection{Contribution}
 
-This paper presents a method augment what a self-driving car can see.
-- Occlusions limit the field of view of the car
-- A small UAV can fly to explore those blind spots and prevent accidents
-- Informative / exploration planning algorithm for the UAV
-- Open source communication framework for multi-robot systems
-- Experiments with real data captured from our car 
+This paper presents a method for extending the sensing capabilities of
+self-driving vehicles by using a small quadrotor to autonomously locate and
+observe regions occluded to the vehicle and detect potentially unsafe obstacles
+such as pedestrians or other cars. Our contributions include
 
 \begin{itemize}
-\item
-Method for finding the relative transform between two mobile robots
-\item
-Method for informative sensing
-\item
-Experiments that prove that the quadcopter can accurately navigate
-to blind spots and land back on the car.
-\end{itemize}
 
-We validate our approach with data collected with our self-driving vehicle and a small UAV.
+    \item A method for determining the relative transformation between a
+        ground vehicle and a quadrotor using an array of ultra-wideband radios
+
+    \item An informative planning algorithm that computes collision free paths
+        for the quadrotor relative to the ground vehicle that view occluded
+        regions
+
+    \item Experimental validation using a sensor-equipped Toyota Prius and a
+        Parrot Bebop 2 quadrotor
+
+\end{itemize}
