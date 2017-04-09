@@ -60,5 +60,14 @@ $$
     x = [\bm{p}, \psi] \in \R^4
 $$
 
+Using the ground vehicle's 2D laser scan, we compute the areas it is unable to
+sense. We employ an anytime sampling based algorithm to construct a collision
+free path for the quadrotor that maximizes the total area of the occluded
+regions it is able to observe. While the quadrotor is executing the planned
+path, we use a convolutional neural network to classify and detect objects in
+the quadrotor's field of view, such as pedestrians and cars, and relay this
+information back to the ground vehicle. The path is updated if it is no longer
+collision free due to changes in the laser scan or if a new path is computed
+that can observe a larger occluded area.
 
 \ja{Can you add here a high-level algorithm? Car maps -> compute blind spots -> plan path -> navigate to bind spots -> detect occluded obstacles -> loop}
