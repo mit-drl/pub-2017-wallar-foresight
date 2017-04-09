@@ -32,7 +32,7 @@ obstacle-filled environments (such as a city center) or land on the car. In this
 paper, we present a method for relative localization using ultra-wideband radios to measure the relative position of the quadcopter relative to the car with an accuracy of <14cm. This information is fused with the internal state estimation to enable the UAV to safely navigate to blind spots and then land back on the car. Furthermore, we have developed a path planning algorithm for remote sensing and have carried out experiments using a quadrotor and a car.
 
 %implemented a Deep Neural Network to detect obstacles, such as pedestrians, from the UAV.
-
+In addition, we have implemented a real-time obstacle detection system, useful for detecting pedestrians from the UAV, using a deep neural network system called YOLO\cite{darknet}. The YOLO neural network divides the image into regions, and predicts the probability and object type for each region that is proposed to be an obstacle. Its unique detection method allows it to run at 15 FPS on our GPU-enabled system, much faster than other approaches.
 
 %Introduction: Lots of accidents due to not seeing what's going on. For example a pedestrian or a biker behind a car. Could be similar to the motivation in Wilko's paper.
 %
