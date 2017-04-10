@@ -127,14 +127,15 @@ this orientation.
     Let $\psi(x, \theta, \B)$ be the set of points visible by the quadrotor at
     position $x \in \R^3$ with orientation $\theta$. Let $\theta^*(x, \B) =
     \argmax{0 < \theta \leq 2\pi} \psi(x, \theta, \B)$. For convenience, we
-    define $\psi^*(x, \B) = \psi(x, \theta^*(x, \B), \B)$. \ja{What are the visiblie points?}
+    define $\psi^*(x, \B) = \psi(x, \theta^*(x, \B), \B)$.
+    % \ja{What are the visiblie points?}
 
 \end{definition}
 
 As the quadrotor follows the path, the planner is constantly replanning. To
 avoid oscillating between candidate paths, the quadrotor only follows a new
 path if its current path is no longer collision free or if the new path has a
-larger objective value. \ja{ADD caption to algorithm and figure!}
+larger objective value. % \ja{ADD caption to algorithm and figure!}
 
 \begin{algorithm}[h!]
     \caption{Path planning for remote sensing UAV (looking around the corner)}
