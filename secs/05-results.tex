@@ -13,11 +13,21 @@ markers on the quadrotor and on each ultra-wideband sensor. This allowed us to
 obtain the absolute position of the quadrotor and UWBs in the same coordinate
 frame. We then flew the quadrotor inside the motion capture system and recorded
 its predicted position determined by our localization and absolute position
-using the motion capture markers. The average error in our localization was
+using the motion capture markers. We ran 10 tests and were able to obtain an error of
 13.7 cm, or 35.9\% the length of the quadrotor. Fig.~\ref{fig:localization}
 shows how our localization compares to the ground truth. The green and red
 lines respectively show the ground truth and predicted positions of the
-quadrotor.\ja{How come it is worse than the reported errors in the UWB paper that we are citing?}
+quadrotor. While our accuracy is less than the system in \cite{tobiuwb}, the UWBs
+in that study were all in the same plane. The accuracy of out-of-plane position estimation
+using range measurements is low compared to in-plane estimation because of the
+increased state space of the estimation. Since we wanted
+our quadrotor to have the ability to fly beyond the plane of the roof-mounted UWBs,
+we included additional out-of-plane UWBs which decrease accuracy compared to
+having all UWBs in the same plane, but which help to provide greater accuracy for
+out-of-plane measurements.
+
+
+\ja{How come it is worse than the reported errors in the UWB paper that we are citing?}
 
 \begin{figure}
 
