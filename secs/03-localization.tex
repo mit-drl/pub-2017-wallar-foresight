@@ -45,29 +45,18 @@ We then find $\bm{\hat{p}^{xy}}$ by solving the nonlinear least squares optimiza
     h(\bm{\hat{p}^{xy}}) = \min_{{\bm{\hat{p}^{xy}}}} \sum_{i=1}^{n} ((r_{i}^{\text{proj}})^2 - \lVert \bm{\hat{p}^{xy}} - \bm{t_i^{xy}}\rVert^2)^2
 \end{align*}
 
-with the Jacobian \ja{with respect to what? P? If so, I think it is not correct. Please check.}
+% with the Jacobian \ja{with respect to what? P? If so, I think it is not correct. Please check.}
+%
+% $$
+%     H(\bm{\hat{p}^{xy}}) = \frac{dh(\bm{\hat{p}^{xy}})}{d\bm{\hat{p}^{xy}}} = \sum_{i=1}^{n} 4((r_i^{\text{proj}})^2 - \lVert \bm{\hat{p}^{xy}} - \bm{t_i^{xy}} \rVert^2)[(\bm{t_i^{x}} - \bm{\hat{p}^{x}}), (\bm{t_i^{y}} - \bm{\hat{p}^{y}})]
+% $$
 
-$$
-    H(\bm{\hat{p}^{xy}}) = \frac{dh(\bm{\hat{p}^{xy}})}{d\bm{\hat{p}^{xy}}} = \sum_{i=1}^{n} 4((r_i^{\text{proj}})^2 - \lVert \bm{\hat{p}^{xy}} - \bm{t_i^{xy}} \rVert^2)[(\bm{t_i^{x}} - \bm{\hat{p}^{x}}), (\bm{t_i^{y}} - \bm{\hat{p}^{y}})]
-$$
-
-We then define the 3D position estimate to be
-
-$$
-   \bm{\hat{p}^{ls}} = [\bm{\hat{p}^{xy}}, \hat{z}]
-$$
-
-Next, we combine $\bm{\hat{p}^{ls}}$ and $\bm{\hat{p}^{\text{odom}}}$ in a second UKF to find
-a final position estimate $\bm{\hat{p}}$. Thus the final state estimate is
-
-$$
-   \hat{x} = [\bm{\hat{p}}, \psi]
-$$
+We then define the 3D position estimate to be $\bm{\hat{p}^{ls}} = [\bm{\hat{p}^{xy}}, \hat{z}]$. Next, we combine $\bm{\hat{p}^{ls}}$ and $\bm{\hat{p}^{\text{odom}}}$ in a second UKF to find a final position estimate $\bm{\hat{p}}$. Thus the final state estimate is, $\hat{x} = [\bm{\hat{p}}, \psi]$
 
 
 \begin{figure}[tb!]
   \centering
-    \includegraphics[width=\textwidth]{foresight_frames}
+    \includegraphics[width=0.7\textwidth]{foresight_frames}
   \caption{The frames and measurements of our system. The base frame
    is the car's body frame. We measure transforms $\bm{t_{i}}$ from the body
    frame to every UWB tag. The quadrotor measures height and yaw in the world
