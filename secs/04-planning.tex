@@ -3,13 +3,12 @@
 \section{Planning For Exploration}
 
 Planning a path to observe the blind spots of an autonomous car is broken into
-following steps. First, using the 2D laser scan from the car, the bounding
-polygon is computed. This polygon represents the known free space where the
-quadrotor can travel. The laser scan is also used to determine regions in space
-where that the car is not able to sense. These regions are called blind
-regions. Using these blind regions and the bounding polygon, a path is computed
-for the quadrotor that maximizes the observed area of the blind regions while
-staying within the bounding polygon. The path is computed for a given time
+following steps. First, using the 2D laser scan from the car, we compute a
+bounding polygon. This polygon represents the known free space where the
+quadrotor can travel. We use the laser scan to determine regions in space where
+that the car is not able to sense. These regions are called blind regions. A
+path is then computed for the quadrotor that maximizes the observed area of the
+blind regions while staying within the bounding polygon for a given time
 horizon.
 
 The remainder of this section is structured as follows; Sec.~\ref{sec:poly}
