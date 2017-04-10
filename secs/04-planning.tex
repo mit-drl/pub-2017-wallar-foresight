@@ -18,13 +18,47 @@ bounding polygon is found, Sec.~\ref{sec:blindregions} describes how the blind
 regions are computed from the laser scan, and Sec.~\ref{sec:planner} describes
 and analyzes the algorithm we developed for computing the exploratory path.
 
-% \begin{figure}
-%     \centering
-%     \includegraphics[width=0.49\linewidth]{01laser}
-%     \includegraphics[width=0.49\linewidth]{02polygon} \\
-%     \includegraphics[width=0.49\linewidth]{03blindspots}
-%     \includegraphics[width=0.49\linewidth]{04planner}
-% \end{figure}
+\begin{figure}[ht]
+
+    \centering
+
+    \begin{subfigure}[t]{0.49\textwidth}
+        \centering
+        \includegraphics[width=1\linewidth]{01laser}
+        \caption{}
+        \label{fig:01laser}
+    \end{subfigure}
+    ~
+    \begin{subfigure}[t]{0.49\textwidth}
+        \centering
+        \includegraphics[width=1\linewidth]{02polygon}
+        \caption{}
+        \label{fig:02polygon}
+    \end{subfigure}
+    ~
+    \begin{subfigure}[t]{0.49\textwidth}
+        \centering
+        \includegraphics[width=1\linewidth]{03blindregions}
+        \caption{}
+        \label{fig:03blindregions}
+    \end{subfigure}
+    ~
+    \begin{subfigure}[t]{0.49\textwidth}
+        \centering
+        \includegraphics[width=1\linewidth]{04planner-small}
+        \caption{}
+        \label{fig:04planner-small}
+    \end{subfigure}
+
+    \caption{Plots showing the four stages of the planner. Fig. (a) shows the
+    points from the laser scan. Fig. (b) shows bounding polygon created from
+the laser scan. Fig. (c) shows the regions occluded to the vehicle in red and
+Fig. (d) shows the initial plan for the quadrotor to view some of these blind
+regions.}
+
+    \label{fig:planner-stages}
+
+\end{figure}
 
 \subsection{Finding the Bounding Polygon}
 
@@ -51,23 +85,8 @@ polygon is defined as the minimum area simple polygon that contains all the
 points in the laser scan. Since the laser scan data is ordered by $\theta_i$
 from $\theta_{\min}$ to $\theta_{\max}$, the bounding polygon can be
 constructed in one pass with the vertex sequence $\{\mathbf{c}\} \cup L \cup
-\{\mathbf{c}\}$. Fig.~\ref{fig:polygon} shows an example of laser scan
+\{\mathbf{c}\}$. Fig.~\ref{fig:02polygon} shows an example of laser scan
 data and the corresponding bounding polygon.
-
-\begin{figure}[ht]
-
-    \centering
-    % \includegraphics[width=0.49\linewidth]{01laser}
-    \includegraphics[width=1\linewidth]{02polygon}
-    % \includegraphics[width=0.49\linewidth]{03blindspots}
-    % \includegraphics[width=0.49\linewidth]{04planner}
-
-    \caption{Constructing the bounding polygon from the laser scan. The black
-        circles are the individual points in the scan and the purple lines
-        are the line segments in the bounding polygon.}
-
-    \label{fig:polygon}
-\end{figure}
 
 \subsection{Determining the Blind Regions}
 
@@ -81,24 +100,10 @@ $\{L_i, L_i + k \cdot \hat{L}_{i, i + 1}, L_{i + 1} + k \cdot \hat{L}_{i, i +
 vector between points $L_i$ and $L_{i + 1}$ that points away from the bounding
 polygon and $k$ is a tuning parameter that contributes to the area of the blind
 region. In practice we only care for blind regions where $||L_i - L_{i + 1}||_2
-> \delta$ where $\delta$ is a tuning parameter. We will use $\B$ to denote the
-set of all such regions.  Fig.~\ref{fig:blindregions} shows an example of blind
-regions in found in a found from a laser scan.
-
-\begin{figure}[ht]
-
-    \centering
-    % \includegraphics[width=0.49\linewidth]{01laser}
-    % \includegraphics[width=1\linewidth]{02polygon}
-    \includegraphics[width=1\linewidth]{03blindregions}
-    % \includegraphics[width=0.49\linewidth]{04planner}
-
-    \caption{Finding the blind regions from the laser scan. The black circles
-        are individual points in the scan and the red filled rectangles are the
-        blind regions}
-
-    \label{fig:blindregions}
-\end{figure}
+> \delta$ where $\delta$ is a tuning parameter because the laser scan consists
+of a finite number of points with a known angular distance. We will use $\B$ to
+denote the set of all such regions.  Fig.~\ref{fig:03blindregions} shows an
+example of blind regions in found in a found from a laser scan.
 
 % maybe can change the name of this section
 \subsection{Computing the Exploratory Path}
@@ -132,10 +137,11 @@ path if its current path is no longer collision free or if the new path has a
 larger objective value. \ja{ADD caption to algorithm and figure!}
 
 \begin{algorithm}[h!]
-    \caption{Algorithm caption}
+    \caption{Path planning for remote sensing UAV (looking around the corner)}
     \algorithmicrequire{\begin{itemize}
             \item $x_0$: The initial position of the robot
             \item $\B$: The blind region
+            \item $\Poly$: The bounding polygon
         \end{itemize}}
     \algorithmicensure{\begin{itemize}
             \item $\Pi \subset \R^3 \times [0, 2\pi]$: A sequence of 3D positions
@@ -160,7 +166,7 @@ larger objective value. \ja{ADD caption to algorithm and figure!}
                 \ENDWHILE
                 \RETURN $\Pi$
             \ENDIF
-            \FORALL{$x' \in \Function{CollisionFreeNeighbours}(x)$}
+            \FORALL{$x' \in \Function{CollisionFreeNeighbours}(x, \Poly)$}
             \STATE $\theta' \leftarrow \theta^*(x', \rB)$
             \STATE $Q \leftarrow Q \cup \{(x', \theta', \rB \, \backslash \,
                     \psi^*(x', \rB))\}$
@@ -183,17 +189,5 @@ $x$ are added to the search along with their maximizing orientation and
 remaining unobserved blind regions.  Once the search has expired, the path,
 $\Pi$ comprised of 3D positions and orientations, that was able to view the
 largest cumulative blind region area starting from $x_0$ is returned.
-Fig.~\ref{fig:planner} shows an example of a path being computed to view the
-blind regions.
-
-\begin{figure}[h!]
-
-    \centering
-
-    \includegraphics[width=1\linewidth]{04planner}
-
-    \caption{}
-
-    \label{fig:planner}
-
-\end{figure}
+Fig.~\ref{fig:04planner-small} shows an example of a path being computed to
+view the blind regions.
