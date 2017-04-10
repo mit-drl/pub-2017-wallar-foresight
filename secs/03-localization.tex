@@ -6,11 +6,7 @@ From each UWB tag we receive a range measurement $r_i$ in its own frame.
 From the quadrotor we receive velocity measurements $\bm{v}$, a yaw reading $\psi_q$,
 and an altitude measurement $z_a$ in an ENU-aligned world frame. The frames and relative
 transforms of our system are visualized in Fig.~\ref{fig:frames}.
-Given $n$ UWBs, we define the measurement vector as
-
-$$
-   z = [r_1, \dots, r_n, \bm{v}, z_a, \psi_q] \in \R^{n+5}
-$$
+Given $n$ UWBs, we define the measurement vector as $z = [r_1, \dots, r_n, \bm{v}, z_a, \psi_q] \in \R^{n+5}$
 
 %We use 6 ultra-wideband radios and the Bebop's onboard odometry measurements
 %to estimate the relative position of the quadcopter with respect to the car with an
@@ -23,10 +19,7 @@ $$
 
 Yaw orientation is calibrated at the start by lining up the quadrotor along the car's x-axis
 and measuring the yaw offset $\psi_{\text{off}}$ between the car and the quadrotor.
-The yaw of the quadrotor is then given by
-$$
-   \psi = \psi_q - \psi_{\text{off}}
-$$
+The yaw of the quadrotor is then given by $\psi = \psi_q - \psi_{\text{off}}$
 
 One challenge we encountered in estimating the 3D position of the quadrotor was that
 the distance measurements from the UWBs showed larger errors when the UWB on the quadrotor was out of their plane.

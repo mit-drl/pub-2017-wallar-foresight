@@ -51,17 +51,13 @@ that maximizes the occluded area viewed by the quadrotor.
 % returns the path that currently maximizes the occluded area viewed by the
 % quadrotor.
 To detect obstacles within the occluded areas, we employ a real-time object
-detecting convolutional neural network~\cite{redmond2016you}, which is able to
+detecting convolutional neural network~\cite{redmon2016you}, which is able to
 classify and locate objects, such as pedestrians, cars, bicycles, in monocular
 images.  These obstacles are then reported back to the ground vehicle.
 
-
-
-Thanks to the differential flatness of quadrotor vehicles, we model our quadrotor by its position $\bm{p}$ and yaw orientation $\psi$, measured in the car's body frame. We therefore describe the state of the quadrotor as
-
-$$
-    x = [\bm{p}, \psi] \in \R^4
-$$
+%
+%
+% Thanks to the differential flatness of quadrotor vehicles, we model our quadrotor by its position $\bm{p}$ and yaw orientation $\psi$, measured in the car's body frame. We therefore describe the state of the quadrotor as $x = [\bm{p}, \psi] \in \R^4$
 
 Using the ground vehicle's 2D laser scan, we compute the areas it is unable to
 sense. We employ an anytime sampling-based algorithm to construct a collision free 

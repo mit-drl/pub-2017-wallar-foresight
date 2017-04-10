@@ -22,28 +22,28 @@ and analyzes the algorithm we developed for computing the exploratory path.
 
     \centering
 
-    \begin{subfigure}[t]{0.49\textwidth}
+    \begin{subfigure}[t]{0.44\textwidth}
         \centering
         \includegraphics[width=1\linewidth]{01laser}
         \caption{}
         \label{fig:01laser}
     \end{subfigure}
     ~
-    \begin{subfigure}[t]{0.49\textwidth}
+    \begin{subfigure}[t]{0.44\textwidth}
         \centering
         \includegraphics[width=1\linewidth]{02polygon}
         \caption{}
         \label{fig:02polygon}
     \end{subfigure}
     ~
-    \begin{subfigure}[t]{0.49\textwidth}
+    \begin{subfigure}[t]{0.44\textwidth}
         \centering
         \includegraphics[width=1\linewidth]{03blindregions}
         \caption{}
         \label{fig:03blindregions}
     \end{subfigure}
     ~
-    \begin{subfigure}[t]{0.49\textwidth}
+    \begin{subfigure}[t]{0.44\textwidth}
         \centering
         \includegraphics[width=1\linewidth]{04planner-small}
         \caption{}
@@ -192,3 +192,10 @@ $\Pi$ comprised of 3D positions and orientations, that was able to view the
 largest cumulative blind region area starting from $x_0$ is returned.
 Fig.~\ref{fig:04planner-small} shows an example of a path being computed to
 view the blind regions.
+
+\subsection{Autonomous Landing}
+
+To enable autonomous landing, the quadrotor tries to maintain a static position
+relative to the car as it drives towards a parking spot. Once the vehicle has
+stopped, the quadrotor moves directly above the landing platform and proceeds
+to land on the platform.
