@@ -51,14 +51,7 @@ We then define the 3D position estimate to be $\bm{\hat{p}^{ls}} = [\bm{\hat{p}^
 \begin{figure}[tb!]
   \centering
     \includegraphics[width=0.7\textwidth]{foresight_frames}
-  \caption{The frames and measurements of our system. We measure transforms 
-   $\bm{t_{i}}$ from the body frame to every UWB tag. 
-   The quadrotor measures height and yaw in the world
-   frame. The velocity controller uses the odom-to-base\textunderscore 
-   link transform to calculate commands to control the quadcopter's velocity.
-   Planning is done in the car's body frame.
-   The UWBs make range measurements $r_{i}$. A position estimate $\bm{\hat{p}}$
-   is calculated by solving for the least squares error between $r_{i}$ and $\bm{\hat{p}}$.}
+  \caption{The frames and measurements of our system.}
   \label{fig:frames}
 \end{figure}
 
