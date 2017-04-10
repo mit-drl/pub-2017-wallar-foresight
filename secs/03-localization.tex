@@ -21,34 +21,34 @@ $$
 
 
 Yaw orientation is calibrated at the start by lining up the quadrotor along the car's x-axis
-and measuring the yaw offset $\psi_{off}$ between the car and the quadrotor.
+and measuring the yaw offset $\psi_{\text{off}}$ between the car and the quadrotor.
 The yaw of the quadrotor is then given by
 $$
-   \psi = \psi_q - \psi_{off}
+   \psi = \psi_q - \psi_{\text{off}}
 $$
 
 One challenge we encountered in estimating the 3D position of the quadrotor was that
 the distance measurements from the UWBs showed larger errors when the UWB on the quadrotor was out of their plane.
-We therefore first estimate $\bm{\hat{p}^{odom}}$ using only use the quadrotor's onboard 
+We therefore first estimate $\bm{\hat{p}^{\text{odom}}}$ using only use the quadrotor's onboard 
 odometry readings $\bm{v}$ and $z_a$ as the inputs to a UKF. We then use the estimated
-height, $\bm{\hat{p}_z^{odom}}$ with the UWB range
+height, $\bm{\hat{p}_z^{\text{odom}}}$ with the UWB range
 measurements $r_i$ to estimate the quadrotor's x-y position, $\bm{\hat{p}^{xy}}$.
 We do this by first projecting each $r_i$ onto the plane of the estimated height of the quadrotor:
 
 $$
-   r_i^{proj} = \sqrt{r_i^2 - (\bm{\hat{p}_z^{odom}})^2}
+   r_i^{\text{proj}} = \sqrt{r_i^2 - (\bm{\hat{p}_z^{\text{odom}}})^2}
 $$
 
 We then find $\bm{\hat{p}^{xy}}$ by solving the nonlinear least squares optimization
 
 \begin{align*} 
-    \min_{{\bm{\hat{p}^{xy}}}} \sum_{i=1}^{n} ((r_{i}^{proj})^2 - \lVert \bm{\hat{p}^{xy}} - \bm{t_i^{xy}}\rVert^2)^2
+    h(\bm{\hat{p}^{xy}}) = \min_{{\bm{\hat{p}^{xy}}}} \sum_{i=1}^{n} ((r_{i}^{\text{proj}})^2 - \lVert \bm{\hat{p}^{xy}} - \bm{t_i^{xy}}\rVert^2)^2
 \end{align*}
 
 with the Jacobian \ja{with respect to what? P? If so, I think it is not correct. Please check.}
 
 $$
-    J = 4((r_i^{proj})^2 - \lVert \bm{\hat{p}^{xy}} - \bm{t_i^{xy}} \rVert^2)(\bm{t_i^{xy}} - \bm{\hat{p}^{xy}})
+    H(\bm{\hat{p}^{xy}}) = \frac{dh(\bm{\hat{p}^{xy}})}{d\bm{\hat{p}^{xy}}} = \sum_{i=1}^{n} 4((r_i^{\text{proj}})^2 - \lVert \bm{\hat{p}^{xy}} - \bm{t_i^{xy}} \rVert^2)[(\bm{t_i^{x}} - \bm{\hat{p}^{x}}), (\bm{t_i^{y}} - \bm{\hat{p}^{y}})]
 $$
 
 We then define the 3D position estimate to be
@@ -57,7 +57,7 @@ $$
    \bm{\hat{p}^{ls}} = [\bm{\hat{p}^{xy}}, \hat{z}]
 $$
 
-Next, we combine $\bm{\hat{p}^{ls}}$ and $\bm{\hat{p}^{odom}}$ in a second UKF to find
+Next, we combine $\bm{\hat{p}^{ls}}$ and $\bm{\hat{p}^{\text{odom}}}$ in a second UKF to find
 a final position estimate $\bm{\hat{p}}$. Thus the final state estimate is
 
 $$
