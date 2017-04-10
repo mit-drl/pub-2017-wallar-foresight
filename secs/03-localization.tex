@@ -2,9 +2,10 @@
 
 \section{Relative pose localization}
 
-From each Ultrawide Band (UWB) tag we receive a range measurement $r_i$ in its own frame. 
+From each UWB tag we receive a range measurement $r_i$ in its own frame. 
 From the quadrotor we receive velocity measurements $\bm{v}$, a yaw reading $\psi_q$,
-and an altitude measurement $z_a$ in an ENU-aligned world frame.
+and an altitude measurement $z_a$ in an ENU-aligned world frame. The frames and relative
+transforms of our system are visualized in Fig.~\ref{fig:frames}.
 Given $n$ UWBs, we define the measurement vector as
 
 $$
@@ -51,15 +52,15 @@ We then find $\bm{\hat{p}^{xy}}$ by solving the nonlinear least squares optimiza
 %     H(\bm{\hat{p}^{xy}}) = \frac{dh(\bm{\hat{p}^{xy}})}{d\bm{\hat{p}^{xy}}} = \sum_{i=1}^{n} 4((r_i^{\text{proj}})^2 - \lVert \bm{\hat{p}^{xy}} - \bm{t_i^{xy}} \rVert^2)[(\bm{t_i^{x}} - \bm{\hat{p}^{x}}), (\bm{t_i^{y}} - \bm{\hat{p}^{y}})]
 % $$
 
-We then define the 3D position estimate to be $\bm{\hat{p}^{ls}} = [\bm{\hat{p}^{xy}}, \hat{z}]$. Next, we combine $\bm{\hat{p}^{ls}}$ and $\bm{\hat{p}^{\text{odom}}}$ in a second UKF to find a final position estimate $\bm{\hat{p}}$. Thus the final state estimate is, $\hat{x} = [\bm{\hat{p}}, \psi]$
+We then define the 3D position estimate to be $\bm{\hat{p}^{ls}} = [\bm{\hat{p}^{xy}}, \hat{z}]$. Next, we combine $\bm{\hat{p}^{ls}}$ and $\bm{\hat{p}^{\text{odom}}}$ in a second UKF to find a final position estimate $\bm{\hat{p}}$. Thus the final state estimate is $\hat{x} = [\bm{\hat{p}}, \psi]$.
 
 
 \begin{figure}[tb!]
   \centering
     \includegraphics[width=0.7\textwidth]{foresight_frames}
-  \caption{The frames and measurements of our system. The base frame
-   is the car's body frame. We measure transforms $\bm{t_{i}}$ from the body
-   frame to every UWB tag. The quadrotor measures height and yaw in the world
+  \caption{The frames and measurements of our system. We measure transforms 
+   $\bm{t_{i}}$ from the body frame to every UWB tag. 
+   The quadrotor measures height and yaw in the world
    frame. The velocity controller uses the odom-to-base\textunderscore 
    link transform to calculate commands to control the quadcopter's velocity.
    Planning is done in the car's body frame.

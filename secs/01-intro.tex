@@ -12,9 +12,9 @@
 %
 % \end{figure}
 
-Globally, over 3000 people loose their lives in vehicle-related accidents and over one hundred thousand are injured or disabled on average \emph{every day} \cite{ASIR2016}.
+Globally, over 3000 people lose their lives in vehicle-related accidents and over one hundred thousand are injured or disabled on average \emph{every day} \cite{ASIR2016}.
 % Worse still is that this number is continuing to increase \cite{NSC2016Fatality}.
-In the United States, over 90\% of these accidents were due to human error \cite{NHTSA_crash_stats}.
+In the United States, over 90\% of these accidents are due to human error \cite{NHTSA_crash_stats}.
 This has resulted in the continued development of advanced safety systems by commercial car manufacturers.
 %Safety systems in automobiles are undergoing rapid development to address the fact troubling continued increase in traffic injuries and fatalities \cite{NSC2016Fatality}. 
 For example, systems exist to automatically brake in the case of unexpected obstacles \cite{Toyota_patent}, maintain a car in a lane at a given speed \cite{bradley2016tesla}, and alert users of pedestrians, signage, and other vehicles on the roadway \cite{Dagan_IVS_2004}. These systems will make our cars safer and eventually autonomous.
@@ -30,7 +30,7 @@ together is to ensure that there exists an accurate pose transform between the c
 and the quadcopter. The accuracy of GPS is not sufficient when the UAV must navigate
 obstacle-filled environments (such as a city center) or land on the car. In
 this paper, we present a method for relative localization using ultra-wideband
-radios to measure the relative position of the quadcopter relative to the car
+radios (UWBs) to measure the relative position of the quadcopter relative to the car
 with an accuracy of less than 14cm. This information is fused with the internal
 state estimation to enable the UAV to safely navigate to blind spots and then
 land back on the car. Furthermore, we have developed a path planning algorithm
@@ -78,12 +78,12 @@ car.
 
 %Motion planning for autonomous cars. Some methods assume full knowledge of the environment [] -> not realistic, while others [] only have local sensing. Our method would work in parallel and provide a "better" map.
 
-Our method presents similarities with multi-robot mapping. For instance \cite{Michael:2012gl} and \cite{Forster:2013kn} combined the maps from a ground and an aerial robot for enhanced exploration and \cite{Delmerico:2017vq} employed a map created by an aerial robot for planning the motion of a ground robot.
+Our method has similarities with multi-robot mapping. For instance \cite{Michael:2012gl} and \cite{Forster:2013kn} combined the maps from a ground and an aerial robot for enhanced exploration and \cite{Delmerico:2017vq} employed a map created by an aerial robot for planning the motion of a ground robot.
 
-There has also been some preliminary work in \cite{nasser2015fleye} that tackled the communication problems associated with flying a quadrotor with a ground vehicle, however it did not look into the planning and perception needed to provide useful information to the ground vehicle.
+There has also been some preliminary work in \cite{nasser2015fleye} that tackled the communication problems associated with flying a quadrotor with a ground vehicle; however, it did not look into the planning and perception needed to provide useful information to the ground vehicle.
 
-%Our method explores the frontiers of the map built by the ground robot and is similar to exploration \cite{}.
-Our idea is similar, yet we focus on the context of safe autonomous driving in cluttered urban environments.
+%Our method explores the frontiers of the map built by the ground robot and is similar to exploration \cite{}. Our idea is similar, yet we focus on the context of safe autonomous driving in cluttered urban environments.
+
 
 Quadrotors have been able to track a moving vehicle using visual techniques
 such as AprilTag localization \cite{borowczyk2016autonomous}, optical flow \cite{herisse2012landing},
@@ -96,11 +96,12 @@ maneuvers such as landing and obstacle avoidance. For example, average accuracy 
 smartphone GPS receivers is 4.9 m \cite{gpsaccuracy}.
 
 Ultra-wideband range sensors have in recent years become a popular tool for
-localization of quadrotors, particularly in indoor GPS-denied environments \cite{prorok2014}, since they can
+localization of quadrotors, particularly in indoor GPS-denied environments 
+\cite{liu2007survey, prorok2014, hollinger2012target, jourdan2005monte}, since they can
 provide distance measurements with an accuracy of 10 cm and a range of
 up to 300 m\footnote{Decawave}. Indoor localization of quadrotors has been
-achieved by placing UWB "anchors" around the perimeter of a room and attaching
-a UWB "tag" on the quadrotor.  Using this technique, \cite{mueller2015fusing}
+achieved by placing UWB ``anchors" around the perimeter of a room and attaching
+a UWB ``tag" on the quadrotor.  Using this technique, \cite{mueller2015fusing}
 has achieved average localization error of ~30 cm, and in
 \cite{kempke2016harmonium}, 90\% of position estimates had less than 31 cm of error.
 
@@ -110,7 +111,7 @@ outfitted with four UWBs was able to follow a person carrying a UWB tag
 in the plane of the quadrotor
 with <10 cm mean error. The authors achieved this accuracy using an
 iterated Extended Kalman Filter. Building off of this work, we used
-6 UWB sensors on a car to localize a UWB on a quadrotor with an
+6 UWB sensors on a car to estimate the 3D position of a UWB on a quadrotor with an
 average mean error of 13.7 cm. Moreover, unlike in previous systems,
 we take advantage of the accurate relative transform to use the sensors
 on the car to plan safe paths for the quadrotor.

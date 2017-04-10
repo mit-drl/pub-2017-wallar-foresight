@@ -38,7 +38,7 @@ c) detect unseen obstacles, such as pedestrians, and report them back to the gro
 
 %\subsection{Method overview}
 
-To accurately localize the quadrotor relative to the ground vehicle, we equip the ground vehicle with several Ultra-wideband radios. In the quadrotor, we fuse, via an Unscented Kalman filter (UKF) relative information from a UWB radio with odometry estimates from a down facing optical flow sensor and an onboard IMU.
+To accurately localize the quadrotor relative to the ground vehicle, we equip the ground vehicle with several UWBs. In the quadrotor, we fuse, via an Unscented Kalman filter (UKF) relative information from a UWB radio with odometry estimates from a down-facing optical flow sensor and an onboard IMU.
 % We use an unscented Kalman filter to fuse these
 % measurements and produce an estimate of quads 3D position relative to the
 % ground vehicle.
@@ -64,14 +64,14 @@ $$
 $$
 
 Using the ground vehicle's 2D laser scan, we compute the areas it is unable to
-sense. We employ an anytime sampling based algorithm to construct a collision
-free path for the quadrotor that maximizes the total area of the occluded
+sense. We employ an anytime sampling-based algorithm to construct a collision free 
+path for the quadrotor that maximizes the total area of the occluded
 regions it is able to observe. While the quadrotor is executing the planned
 path, we use a convolutional neural network to classify and detect objects in
 the quadrotor's field of view, such as pedestrians and cars, and relay this
 information back to the ground vehicle. The path is updated if it is no longer
 collision free due to changes in the laser scan or if a new path is computed
-that can observe a larger occluded area. On high level overview of the entire
+that can observe a larger occluded area. A high level overview of the entire
 process is shown in Algo.~\ref{algo:overview}.
 
 \begin{algorithm}[h!]
