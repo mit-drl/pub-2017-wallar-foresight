@@ -48,8 +48,7 @@ front of the car and six Decawave TREK1000 ultra-wideband radios mounted on the
 roof and front bumper of the car. A platform for the quadrotor to take off and
 land is attached to the front bumper of the Prius. We used a Parrot Bebop 2
 quadrotor with a Decawave TREK1000 mounted on the battery.  Fig.~\ref{fig:car}
-and Fig.~\ref{fig:bebop-actual} show the Toyota Prius and modified Bebop 2
-quadrotor used in the experiments.
+shows the Toyota Prius and modified Bebop 2 quadrotor used in the experiments.
 
 \begin{figure}[h!]
 
@@ -64,19 +63,15 @@ quadrotor used in the experiments.
 
 \end{figure}
 
-% \begin{figure}[h!]
-%
-%     \centering
-%
-%     \includegraphics[width=0.7\linewidth]{bebop-actual}
-%     % \includegraphics[height=3.8cm]{car}
-%     % \includegraphics[height=3.8cm]{bebop-actual}
-%
-%     \caption{}
-%
-%     \label{fig:bebop-actual}
-%
-% \end{figure}
+We also ran tests using an autonomous golf cart as our ground vehicle in two
+different settings.  One setting, shown in Fig.~\ref{fig:exp-buggy-inside}, was
+artificially created using tall whiteboards as obstacles to mimic an
+adversarial environment. The second, shown in Fig.~\ref{fig:exp-buggy-outside},
+was a more realistic setting with the golf cart approaching an open garage door
+with blind spots on either side. In both these cases the quadrotor was
+successfully able to observe the blind spots and relay this information back to
+the computer on board the golf cart. For the interest of brevity, we will only
+discuss in detail the experiments using the Toyota Prius.
 
 Our experimental scenario involves a car preparing to leave a garage with a
 significant blind spot. The car is unable to sense around the corner to
@@ -86,6 +81,52 @@ flies out of the garage and looks around the corner. The car is then able to
 leave the garage when there are no more pedestrians detected by the quadrotor.
 Once the car is ready to return, it backs up into the garage. The quadrotor
 then follows the car into the garage and autonomously lands on the platform.
+
+\begin{figure}[t!]
+
+    \centering
+
+    \begin{subfigure}[t]{0.7\textwidth}
+
+        \centering
+        \includegraphics[width=1.0\linewidth]{exp-car-garage}
+        \caption{}
+
+        \label{fig:exp-car-garage}
+
+    \end{subfigure}
+
+    \vspace*{1mm}
+
+    \begin{subfigure}[t]{0.7\textwidth}
+
+        \centering
+        \includegraphics[width=1.0\linewidth]{exp-buggy-inside}
+        \caption{}
+
+        \label{fig:exp-buggy-inside}
+
+    \end{subfigure}
+
+    \vspace*{1mm}
+
+    \begin{subfigure}[t]{0.7\textwidth}
+
+        \centering
+        \includegraphics[width=1.0\linewidth]{exp-buggy-outside}
+        \caption{}
+
+        \label{fig:exp-buggy-outside}
+
+    \end{subfigure}
+
+    \caption{Snapshots from three different experimental settings we tested our
+    algorithm on. Figure (a) used a Toyota Prius. Figures (b) and (c) used an
+autonomous golf cart.}
+
+    \label{fig:exps}
+
+\end{figure}
 
 \subsection{Experiment With Quadrotor}
 
@@ -135,7 +176,12 @@ through the open garage door using the laser scan from the car.
 \subsubsection{Landing On the Car}
 
 Once the car is ready to park, the quadrotor is able to autonomously land back
-on the platform attached to the front bumper.
+on the platform attached to the front bumper. Fig.~\ref{fig:landing}, shows
+snapshots from the experiment as the quadrotor followed the car and landed on
+the platform. The first image in Fig.~\ref{fig:landing} shows the quadrotor
+following the car as it backs up into a garage. The second shows the car parked
+and the quadrotor hovering over the platform. The last image shows the
+quadrotor after it successfully landed on the platform.
 
 \begin{figure}[h!]
 
@@ -145,6 +191,6 @@ on the platform attached to the front bumper.
 
     \caption{}
 
-    \label{fig:experiment}
+    \label{fig:landing}
 
 \end{figure}

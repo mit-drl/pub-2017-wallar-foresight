@@ -50,7 +50,10 @@ that maximizes the occluded area viewed by the quadrotor.
 % towards these regions. The search terminates when a timeout has expired and
 % returns the path that currently maximizes the occluded area viewed by the
 % quadrotor.
-To detect obstacles within the occluded areas, we employ a real-time object detecting convolutional neural network~\cite{yolo}, which is able to classify and locate objects, such as pedestrians, cars, bicycles, in monocular images. These obstacles are then reported back to the ground vehicle.
+To detect obstacles within the occluded areas, we employ a real-time object
+detecting convolutional neural network~\cite{redmond2016you}, which is able to
+classify and locate objects, such as pedestrians, cars, bicycles, in monocular
+images.  These obstacles are then reported back to the ground vehicle.
 
 
 
@@ -68,6 +71,31 @@ path, we use a convolutional neural network to classify and detect objects in
 the quadrotor's field of view, such as pedestrians and cars, and relay this
 information back to the ground vehicle. The path is updated if it is no longer
 collision free due to changes in the laser scan or if a new path is computed
-that can observe a larger occluded area.
+that can observe a larger occluded area. On high level overview of the entire
+process is shown in Algo.~\ref{algo:overview}.
 
-\ja{Can you add here a high-level algorithm? Car maps -> compute blind spots -> plan path -> navigate to bind spots -> detect occluded obstacles -> loop}
+\begin{algorithm}[h!]
+    \caption{Overview of the Foresight algorithm}
+    \label{algo:overview}
+    \begin{algorithmic}[1]
+        \setcounter{ALC@line}{0}
+        \STATE $\Pi \leftarrow \emptyset$
+        \WHILE {$\Function{IsRunning}()$}
+        \STATE $x \leftarrow \Function{GetQuadrotorConfiguration}()$
+        \STATE $L \leftarrow \Function{GetLaserScan}()$
+        \STATE $\Poly \leftarrow \Function{ConstructBoundingPolygon}(L)$
+        \STATE $\B \leftarrow \Function{ComputeBlindRegions}(L)$
+        \STATE $\widetilde{\Pi} \leftarrow
+        \Function{ComputeCoveragePath}(x, \B, \Poly)$
+        \IF {$|\Pi| = 0 \vee \neg \Function{PathCollisionFree}(\Pi, \Poly)
+            \vee$ \\ $\pushcode \Function{ObservingArea}(\widetilde{\Pi}, \B) >
+            \Function{ObservingArea}(\Pi, \B)$}
+            \STATE $\Pi \leftarrow \widetilde{\Pi}$
+        \ENDIF
+        \STATE $\Function{SendPathToQuadrotor}(\Pi)$
+        \ENDWHILE
+    \end{algorithmic}
+\end{algorithm}
+
+%
+% \ja{Can you add here a high-level algorithm? Car maps -> compute blind spots -> plan path -> navigate to bind spots -> detect occluded obstacles -> loop}

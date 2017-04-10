@@ -28,8 +28,14 @@ fill in the blind spots in its vision.
 A crucial step in enabling a small UAV and an autonomous car to work
 together is to ensure that there exists an accurate pose transform between the car
 and the quadcopter. The accuracy of GPS is not sufficient when the UAV must navigate
-obstacle-filled environments (such as a city center) or land on the car. In this 
-paper, we present a method for relative localization using ultra-wideband radios to measure the relative position of the quadcopter relative to the car with an accuracy of <14cm. This information is fused with the internal state estimation to enable the UAV to safely navigate to blind spots and then land back on the car. Furthermore, we have developed a path planning algorithm for remote sensing and have carried out experiments using a quadrotor and a car.
+obstacle-filled environments (such as a city center) or land on the car. In
+this paper, we present a method for relative localization using ultra-wideband
+radios to measure the relative position of the quadcopter relative to the car
+with an accuracy of less than 14cm. This information is fused with the internal
+state estimation to enable the UAV to safely navigate to blind spots and then
+land back on the car. Furthermore, we have developed a path planning algorithm
+for remote sensing and have carried out experiments using a quadrotor and a
+car.
 
 %implemented a Deep Neural Network to detect obstacles, such as pedestrians, from the UAV.
 % In addition, we have implemented a real-time obstacle detection system, useful for detecting pedestrians from the UAV, using a deep neural network system called YOLO \cite{darknet}. The YOLO neural network divides the image into regions, and predicts the probability and object type for each region that is proposed to be an obstacle. Its unique detection method allows it to run at 15 FPS on our GPU-enabled system, much faster than other approaches.
@@ -107,7 +113,6 @@ on the car to plan safe paths for the quadrotor.
 
 \subsection{Contribution}
 
-% <<<<<<< HEAD
 This paper presents a method for extending the sensing capabilities of
 self-driving vehicles by using a small quadrotor to autonomously locate and
 observe regions occluded to the vehicle and detect potentially unsafe obstacles
@@ -122,23 +127,11 @@ such as pedestrians or other cars. Our contributions include
         for the quadrotor relative to the ground vehicle that view occluded
         regions
 
+    \item A system that uses the localization and planning algorithms and
+        enables a UAV to position itself and transmit images outside the field
+        of view of the sensors on the car
+
     \item Experimental validation using a sensor-equipped Toyota Prius and a
         Parrot Bebop 2 quadrotor
 
 \end{itemize}
-% =======
-% This paper presents a method for augmenting the sensing capabilities of self-driving cars.
-% In particular, we employ a small aerial vehicle (quadrotor) to autonomously inspect areas that are occluded for the car and detect unsafe situations early enough, such as
-% pedestrians and bikers in blind sports or other vehicles in blind intersections.
-%
-% % This paper presents a method augment what a self-driving car can see.
-% % - Occlusions limit the field of view of the car
-% % - A small UAV can fly to explore those blind spots and prevent accidents
-% % - Informative / exploration planning algorithm for the UAV
-% % - Open source communication framework for multi-robot systems
-% % - Experiments with real data captured from our car 
-%
-% Our holistic method contributes an algorithm for informative exploration of occluded spots in the local map built by the ground vehicle. To achieve this, we also provide a ROS-based open source communication framework for multi-robot systems and a UWB-based localization system.
-%
-% We validate our approach with experiments with our self-driving vehicle and a small UAV. Our experiments show that the quadcopter can accurately navigate to blind spots, find occluded pedestrians and land back on the car.
-% >>>>>>> 7e7c728f4f915014eb8c483f0f8e35c626a055ff
