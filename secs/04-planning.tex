@@ -15,7 +15,7 @@ The remainder of this section is structured as follows; Sec.~\ref{sec:poly}
 introduces the our formal definition of a laser scan and describes how the
 bounding polygon is found, Sec.~\ref{sec:blindregions} describes how the blind
 regions are computed from the laser scan, and Sec.~\ref{sec:planner} describes
-and analyzes the algorithm we developed for computing the exploratory path.
+the algorithm we developed for computing the exploratory path.
 
 \begin{figure}[ht]
 
@@ -190,6 +190,11 @@ $\Pi$ comprised of 3D positions and orientations, that was able to view the
 largest cumulative blind region area starting from $x_0$ is returned.
 Fig.~\ref{fig:04planner-small} shows an example of a path being computed to
 view the blind regions.
+
+Since the obstacles and blind regions are two dimensional, we fix the altitude
+of the quadrotor in our experiments. In the future we would like to extend the
+blind region detection and planning to three dimensions by using a 3D point
+cloud sensor mounted on the ground vehicle.
 
 \subsection{Autonomous Landing}
 

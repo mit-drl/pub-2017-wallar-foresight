@@ -12,8 +12,10 @@ A lightweight companion quadrotor equipped with a front facing camera. The drone
 
 Given a laser scan from the ground vehicle, our objective is to:
 a) determine which areas of the environment are occluded to ground vehicle,
-b) compute a safe path for the aerial vehicle to observe the occluded areas, and
-c) detect unseen obstacles, such as pedestrians, and report them back to the ground vehicle.
+b) compute a safe path for the aerial vehicle to observe the occluded areas,
+and c) detect unseen obstacles, such as pedestrians, and report them back to
+the ground vehicle. The quadrotor will take off from the vehicle when it is
+ready to begin driving and land back on the vehicle when it has parked.
 
 % Our problem is two pronged. First we need to be able to accurately localize the
 % quadrotor in the same reference frame as the vehicle. Second, we need to
@@ -65,10 +67,11 @@ path for the quadrotor that maximizes the total area of the occluded
 regions it is able to observe. While the quadrotor is executing the planned
 path, we use a convolutional neural network to classify and detect objects in
 the quadrotor's field of view, such as pedestrians and cars, and relay this
-information back to the ground vehicle. The path is updated if it is no longer
-collision free due to changes in the laser scan or if a new path is computed
-that can observe a larger occluded area. A high level overview of the entire
-process is shown in Algo.~\ref{algo:overview}.
+information back to the ground vehicle. The driver of the vehicle is then able
+to view the quadrotor's camera feed along with the annotated objects. The path
+is updated if it is no longer collision free due to changes in the laser scan
+or if a new path is computed that can observe a larger occluded area. A high
+level overview of the entire process is shown in Algo.~\ref{algo:overview}.
 
 \begin{algorithm}[h!]
     \caption{Overview of the Foresight algorithm}
